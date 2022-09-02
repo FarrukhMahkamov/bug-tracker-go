@@ -9,7 +9,13 @@ import (
 )
 
 func (h *Handler) GetAllJobType(c *gin.Context) {
+	JobTypes, err := h.seriveces.JobType.GetAllJobType()
+	if err != nil {
+		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
 
+	c.JSON(http.StatusOK, JobTypes)
 }
 
 func (h *Handler) ShowJobType(c *gin.Context) {

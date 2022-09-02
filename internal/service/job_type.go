@@ -17,3 +17,7 @@ func NewJobTypeService(repo repository.JobType) *JobTypeService {
 func (s *JobTypeService) StoreJobType(JobType datastruct.JobType) (dto.JobType, error) {
 	return s.repo.StoreJobType(JobType)
 }
+
+func (s *JobTypeService) GetAllJobType() ([]datastruct.JobType, error) {
+	return s.repo.GetAllJobType()
+}

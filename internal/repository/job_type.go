@@ -26,3 +26,11 @@ func (r *JobTypePostgres) StoreJobType(JobType datastruct.JobType) (dto.JobType,
 
 	return StoredJobType, nil
 }
+
+func (r *JobTypePostgres) GetAllJobType() ([]datastruct.JobType, error) {
+	var JobTypes []datastruct.JobType
+
+	err := r.db.Select(&JobTypes, query.GetAllJobTypes)
+
+	return JobTypes, err
+}
