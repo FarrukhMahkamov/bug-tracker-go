@@ -1,11 +1,16 @@
 package repository
 
-import "github.com/jmoiron/sqlx"
+import (
+	"github.com/FarrukhMahkamov/bugtracker/internal/datastruct"
+	"github.com/FarrukhMahkamov/bugtracker/internal/dto"
+	"github.com/jmoiron/sqlx"
+)
 
 type Authortization interface {
 }
 
 type JobType interface {
+	StoreJobType(JobType datastruct.JobType) (dto.JobType, error)
 }
 
 type Repository struct {
@@ -14,5 +19,7 @@ type Repository struct {
 }
 
 func NewRepository(db *sqlx.DB) *Repository {
-	return &Repository{}
+	return &Repository{
+		JobType: NewJobTypePostgers(db),
+	}
 }

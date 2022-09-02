@@ -1,8 +1,6 @@
 package main
 
 import (
-	"log"
-
 	server "github.com/FarrukhMahkamov/bugtracker"
 	"github.com/FarrukhMahkamov/bugtracker/internal/handler"
 	"github.com/FarrukhMahkamov/bugtracker/internal/repository"
@@ -13,8 +11,9 @@ import (
 )
 
 func main() {
+
 	if err := InitConfig(); err != nil {
-		log.Fatalf("Error while reading config: %s", err.Error())
+		logrus.Fatalf("Error while reading config: %s", err.Error())
 	}
 	logrus.SetFormatter(new(logrus.JSONFormatter))
 
@@ -28,7 +27,7 @@ func main() {
 	})
 
 	if err != nil {
-		log.Fatalf("Error while initializing database: %s", err.Error())
+		logrus.Fatalf("Error while initializing database: %s", err.Error())
 	}
 
 	repositories := repository.NewRepository(db)
@@ -37,7 +36,7 @@ func main() {
 	srv := new(server.Server)
 
 	if err := srv.Serve(viper.GetString("port"), handlers.InitiRoutes()); err != nil {
-		log.Fatalf("Error ocured while serivng server")
+		logrus.Fatalf("Error ocured while serivng server")
 	}
 }
 
