@@ -11,7 +11,7 @@ type Error struct {
 
 type NewSuccessResponse struct {
 	Message string `json:"message"`
-	Status  string `json:"status"`
+	Status  int    `json:"status"`
 }
 
 func NewErrorResponse(c *gin.Context, statusCode int, message string) {

@@ -42,3 +42,9 @@ func (r *JobTypePostgres) ShowJobType(JobTypeId int) (dto.JobType, error) {
 
 	return JobType, err
 }
+
+func (r *JobTypePostgres) DeleteJobType(JobTypeId int) error {
+	_, err := r.db.Exec(query.DeleteJobType, JobTypeId)
+
+	return err
+}

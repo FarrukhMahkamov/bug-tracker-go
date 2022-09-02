@@ -25,3 +25,7 @@ func (s *JobTypeService) GetAllJobType() ([]datastruct.JobType, error) {
 func (s *JobTypeService) ShowJobType(JobTypeId int) (dto.JobType, error) {
 	return s.repo.ShowJobType(JobTypeId)
 }
+
+func (s *JobTypeService) DeleteJobType(JobTypeId int) error {
+	return s.repo.DeleteJobType(JobTypeId)
+}

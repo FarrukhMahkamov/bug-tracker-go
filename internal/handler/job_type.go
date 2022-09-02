@@ -56,5 +56,20 @@ func (h *Handler) UpdateJobType(c *gin.Context) {
 
 }
 func (h *Handler) DeleteJobType(c *gin.Context) {
+	JobTypeId, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
 
+	err = h.seriveces.JobType.DeleteJobType(JobTypeId)
+	if err != nil {
+		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	c.JSON(http.StatusOK, response.NewSuccessResponse{
+		Message: "Deleted Successfully",
+		Status:  http.StatusNoContent,
+	})
 }
