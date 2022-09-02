@@ -2,6 +2,7 @@ package handler
 
 import (
 	"net/http"
+	"strconv"
 
 	"github.com/FarrukhMahkamov/bugtracker/internal/datastruct"
 	"github.com/FarrukhMahkamov/bugtracker/internal/response"
@@ -19,7 +20,19 @@ func (h *Handler) GetAllJobType(c *gin.Context) {
 }
 
 func (h *Handler) ShowJobType(c *gin.Context) {
+	JobTypeId, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
 
+	JobType, err := h.seriveces.JobType.ShowJobType(JobTypeId)
+	if err != nil {
+		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	c.JSON(http.StatusOK, JobType)
 }
 
 func (h *Handler) StoreJobType(c *gin.Context) {

@@ -34,3 +34,11 @@ func (r *JobTypePostgres) GetAllJobType() ([]datastruct.JobType, error) {
 
 	return JobTypes, err
 }
+
+func (r *JobTypePostgres) ShowJobType(JobTypeId int) (dto.JobType, error) {
+	var JobType dto.JobType
+
+	err := r.db.Get(&JobType, query.ShowJobType, JobTypeId)
+
+	return JobType, err
+}

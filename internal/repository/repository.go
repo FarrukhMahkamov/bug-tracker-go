@@ -12,6 +12,7 @@ type Authortization interface {
 type JobType interface {
 	StoreJobType(JobType datastruct.JobType) (dto.JobType, error)
 	GetAllJobType() ([]datastruct.JobType, error)
+	ShowJobType(JobTypeId int) (dto.JobType, error)
 }
 
 type Repository struct {
