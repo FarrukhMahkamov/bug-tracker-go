@@ -17,13 +17,23 @@ type JobType interface {
 	UpdatedJobType(JobType dto.JobTypeUpdate, JobTypeId int) error
 }
 
+type Team interface {
+	StoreTeam(Team dto.Team) (dto.Team, error)
+	GetAllTeam() ([]dto.Team, error)
+	ShowTeam(TeamId int) (dto.Team, error)
+	DeleteTeam(TeamId int) error
+	UpdatedTeam(Team dto.TeamUpdate, TeamId int) error
+}
+
 type Service struct {
 	Authortization
 	JobType
+	Team
 }
 
 func NewService(repos *repository.Repository) *Service {
 	return &Service{
 		JobType: NewJobTypeService(repos.JobType),
+		Team:    NewTeamService(repos.Team),
 	}
 }
