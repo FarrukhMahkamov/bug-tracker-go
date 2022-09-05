@@ -11,5 +11,5 @@ CREATE TABLE users
 CREATE TABLE job_types
 (
     id BIGSERIAL NOT NULL UNIQUE,
-    job_type_name VARCHAR(255) UNIQUE
+    job_type_name VARCHAR(255)
 );

@@ -29,3 +29,7 @@ func (s *JobTypeService) ShowJobType(JobTypeId int) (dto.JobType, error) {
 func (s *JobTypeService) DeleteJobType(JobTypeId int) error {
 	return s.repo.DeleteJobType(JobTypeId)
 }
+
+func (s *JobTypeService) UpdatedJobType(JobType dto.JobTypeUpdate, JobTypeId int) error {
+	return s.repo.UpdatedJobType(JobType, JobTypeId)
+}

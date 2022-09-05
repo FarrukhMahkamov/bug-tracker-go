@@ -5,6 +5,7 @@ import (
 	"strconv"
 
 	"github.com/FarrukhMahkamov/bugtracker/internal/datastruct"
+	"github.com/FarrukhMahkamov/bugtracker/internal/dto"
 	"github.com/FarrukhMahkamov/bugtracker/internal/response"
 	"github.com/gin-gonic/gin"
 )
@@ -53,6 +54,24 @@ func (h *Handler) StoreJobType(c *gin.Context) {
 }
 
 func (h *Handler) UpdateJobType(c *gin.Context) {
+	JobTypeId, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	var input dto.JobTypeUpdate
+
+	err = h.seriveces.JobType.UpdatedJobType(input, JobTypeId)
+	if err != nil {
+		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	c.JSON(http.StatusOK, response.NewSuccessResponse{
+		Message: "Updated SuccessFully",
+		Status:  http.StatusOK,
+	})
 
 }
 func (h *Handler) DeleteJobType(c *gin.Context) {

@@ -6,7 +6,7 @@ import (
 	"github.com/jmoiron/sqlx"
 )
 
-type Authortization interface {
+type Authorization interface {
 }
 
 type JobType interface {
@@ -14,10 +14,11 @@ type JobType interface {
 	GetAllJobType() ([]datastruct.JobType, error)
 	ShowJobType(JobTypeId int) (dto.JobType, error)
 	DeleteJobType(JobTypeId int) error
+	UpdatedJobType(JobType dto.JobTypeUpdate, JobTypeId int) error
 }
 
 type Repository struct {
-	Authortization
+	Authorization
 	JobType
 }
 

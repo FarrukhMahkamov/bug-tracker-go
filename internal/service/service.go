@@ -14,6 +14,7 @@ type JobType interface {
 	GetAllJobType() ([]datastruct.JobType, error)
 	ShowJobType(JobTypeId int) (dto.JobType, error)
 	DeleteJobType(JobTypeId int) error
+	UpdatedJobType(JobType dto.JobTypeUpdate, JobTypeId int) error
 }
 
 type Service struct {

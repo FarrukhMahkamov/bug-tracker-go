@@ -5,4 +5,5 @@ const (
 	GetAllJobTypes = `SELECT id, job_type_name FROM job_types`
 	ShowJobType    = `SELECT id, job_type_name FROM job_types WHERE id=$1`
 	DeleteJobType  = `DELETE FROM job_types WHERE id=$1`
+	UpdatedJobType = `UPDATE job_types SET job_type_name=$1 WHERE id=$2`
 )
