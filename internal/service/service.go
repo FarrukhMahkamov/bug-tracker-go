@@ -25,15 +25,45 @@ type Team interface {
 	UpdatedTeam(Team dto.TeamUpdate, TeamId int) error
 }
 
+type Tag interface {
+	StoreTag(Tag dto.Tag) (dto.Tag, error)
+	GetAllTag() ([]dto.Tag, error)
+	ShowTag(TagId int) (dto.Tag, error)
+	DeleteTag(TagId int) error
+	UpdatedTag(Tag dto.TagUpdate, TagId int) error
+}
+
+type Category interface {
+	StoreCategory(Category dto.Category) (dto.Category, error)
+	GetAllCategory() ([]dto.Category, error)
+	ShowCategory(CategoryId int) (dto.Category, error)
+	DeleteCategory(CategoryId int) error
+	UpdatedCategory(Category dto.CategoryUpdate, CategoryId int) error
+}
+
+type Status interface {
+	StoreStatus(Status dto.Status) (dto.Status, error)
+	GetAllStatus() ([]dto.Status, error)
+	ShowStatus(StatusId int) (dto.Status, error)
+	DeleteStatus(StatusId int) error
+	UpdatedStatus(Status dto.StatusUpdate, StatusId int) error
+}
+
 type Service struct {
 	Authortization
 	JobType
 	Team
+	Tag
+	Category
+	Status
 }
 
 func NewService(repos *repository.Repository) *Service {
 	return &Service{
-		JobType: NewJobTypeService(repos.JobType),
-		Team:    NewTeamService(repos.Team),
+		JobType:  NewJobTypeService(repos.JobType),
+		Team:     NewTeamService(repos.Team),
+		Tag:      NewTagService(repos.Tag),
+		Category: NewCategoryService(repos.Category),
+		Status:   NewStatusService(repos.Status),
 	}
 }
