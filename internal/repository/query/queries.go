@@ -34,4 +34,5 @@ const (
 	StoreBug = `INSERT INTO bugs (bug_title, bug_description, status_id, category_id) VALUES ($1, $2, $3, $4)
 				RETURNING id, bug_title, bug_description, is_completed, status_id, category_id`
 	GetAllBugs = `SELECT id, bug_title, bug_description, is_completed, status_id, category_id FROM bugs`
+	CloseIssue = `UPDATE bugs SET is_completed=true WHERE id=$1`
 )

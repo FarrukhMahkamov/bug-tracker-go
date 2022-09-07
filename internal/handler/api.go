@@ -76,6 +76,7 @@ func (h *Handler) InitiRoutes() *gin.Engine {
 		{
 			bugs.GET("/", h.GetAllBug)
 			bugs.POST("/", h.StoreBug)
+			bugs.PUT("/:id", h.CloseIssue)
 		}
 
 	}

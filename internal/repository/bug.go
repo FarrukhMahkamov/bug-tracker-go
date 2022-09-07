@@ -40,3 +40,9 @@ func (r *BugPostgres) GetAllBug() ([]dto.Bug, error) {
 
 	return Bugs, err
 }
+
+func (r *BugPostgres) CloseIssue(BugId int) error {
+	_, err := r.db.Exec(query.CloseIssue, BugId)
+
+	return err
+}

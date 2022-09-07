@@ -20,3 +20,7 @@ func (s *BugService) StoreBug(Bug dto.Bug) (dto.Bug, error) {
 func (s *BugService) GetAllBug() ([]dto.Bug, error) {
 	return s.repo.GetAllBug()
 }
+
+func (s *BugService) CloseIssue(BugId int) error {
+	return s.repo.CloseIssue(BugId)
+}

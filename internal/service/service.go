@@ -52,6 +52,7 @@ type Status interface {
 type Bug interface {
 	StoreBug(Bug dto.Bug) (dto.Bug, error)
 	GetAllBug() ([]dto.Bug, error)
+	CloseIssue(BugId int) error
 }
 type Service struct {
 	Authortization
