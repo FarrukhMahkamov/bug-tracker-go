@@ -25,9 +25,13 @@ const (
 	DeleteCategory   = `DELETE FROM categories WHERE id=$1`
 	UpdatedCategory  = `UPDATE categories SET category_name=$1 WHERE id=$2`
 
-	StoreStatus    = `INSERT INTO statuses (category_name) VALUES ($1) RETURNING id, status_name`
+	StoreStatus    = `INSERT INTO statuses (status_name) VALUES ($1) RETURNING id, status_name`
 	GetAllStatuses = `SELECT id, status_name FROM statuses`
 	ShowStatus     = `SELECT id, status_name FROM statuses WHERE id=$1`
 	DeleteStatus   = `DELETE FROM statuses WHERE id=$1`
 	UpdatedStatus  = `UPDATE statuses SET status_name=$1 WHERE id=$2`
+
+	StoreBug = `INSERT INTO bugs (bug_title, bug_description, status_id, category_id) VALUES ($1, $2, $3, $4)
+				RETURNING id, bug_title, bug_description, is_completed, status_id, category_id`
+	GetAllBugs = `SELECT id, bug_title, bug_description, is_completed, status_id, category_id FROM bugs`
 )

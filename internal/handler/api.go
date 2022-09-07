@@ -72,6 +72,12 @@ func (h *Handler) InitiRoutes() *gin.Engine {
 			statuses.DELETE("/:id", h.DeleteStatus)
 		}
 
+		bugs := api.Group("/bugs")
+		{
+			bugs.GET("/", h.GetAllBug)
+			bugs.POST("/", h.StoreBug)
+		}
+
 	}
 
 	return router

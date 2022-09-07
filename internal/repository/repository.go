@@ -49,6 +49,10 @@ type Status interface {
 	UpdatedStatus(Status dto.StatusUpdate, StatusId int) error
 }
 
+type Bug interface {
+	StoreBug(Bug dto.Bug) (dto.Bug, error)
+	GetAllBug() ([]dto.Bug, error)
+}
 type Repository struct {
 	Authorization
 	JobType
@@ -56,6 +60,7 @@ type Repository struct {
 	Tag
 	Category
 	Status
+	Bug
 }
 
 func NewRepository(db *sqlx.DB) *Repository {
@@ -65,5 +70,6 @@ func NewRepository(db *sqlx.DB) *Repository {
 		Tag:      NewTagPostgers(db),
 		Category: NewCategoryPostgers(db),
 		Status:   NewStatusPostgers(db),
+		Bug:      NewBugPostgers(db),
 	}
 }

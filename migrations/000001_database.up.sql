@@ -37,3 +37,15 @@ CREATE TABLE statuses
     id BIGSERIAL NOT NULL UNIQUE,
     status_name VARCHAR(255)
 );
+
+CREATE TABLE bugs
+(
+    id BIGSERIAL NOT NULL UNIQUE,
+    bug_title VARCHAR(255) NOT NULL,
+    bug_description TEXT,
+    is_completed BOOLEAN DEFAULT FALSE,
+    status_id INT,
+    category_id INT,
+    FOREIGN KEY(status_id) REFERENCES statuses(id) ON DELETE SET NULL,
+    FOREIGN KEY(category_id) REFERENCES categories(id) ON DELETE SET NULL
+);

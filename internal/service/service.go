@@ -49,6 +49,10 @@ type Status interface {
 	UpdatedStatus(Status dto.StatusUpdate, StatusId int) error
 }
 
+type Bug interface {
+	StoreBug(Bug dto.Bug) (dto.Bug, error)
+	GetAllBug() ([]dto.Bug, error)
+}
 type Service struct {
 	Authortization
 	JobType
@@ -56,6 +60,7 @@ type Service struct {
 	Tag
 	Category
 	Status
+	Bug
 }
 
 func NewService(repos *repository.Repository) *Service {
@@ -65,5 +70,6 @@ func NewService(repos *repository.Repository) *Service {
 		Tag:      NewTagService(repos.Tag),
 		Category: NewCategoryService(repos.Category),
 		Status:   NewStatusService(repos.Status),
+		Bug:      NewBugService(repos.Bug),
 	}
 }
