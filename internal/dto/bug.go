@@ -9,6 +9,13 @@ type Bug struct {
 	StatusId       int    `json:"status_id" db:"status_id"`
 }
 
+type AllBugs struct {
+	Id             int64  `json:"id" db:"id"`
+	BugTitle       string `json:"bug_title" db:"bug_title"`
+	BugDescription string `json:"bug_description" db:"bug_description"`
+	IsCompleted    bool   `json:"is_comleted" db:"is_completed"`
+}
+
 type BugUpdate struct {
 	Id             int64  `json:"id" db:"id"`
 	BugTitle       string `json:"bug_title" db:"bug_title"`

@@ -51,9 +51,10 @@ type Status interface {
 
 type Bug interface {
 	StoreBug(Bug dto.Bug) (dto.Bug, error)
-	GetAllBug() ([]dto.Bug, error)
+	GetAllBug() ([]dto.AllBugs, error)
 	CloseIssue(BugId int) error
 	AddTag(Tags dto.BugTag, BugId int) error
+	GetTagsByBugId(BugId int) ([]dto.Tag, error)
 }
 type Service struct {
 	Authortization

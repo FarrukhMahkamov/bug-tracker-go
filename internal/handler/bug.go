@@ -80,3 +80,19 @@ func (h *Handler) AddTag(c *gin.Context) {
 		Status:  http.StatusOK,
 	})
 }
+
+func (h *Handler) GetTagsByBugId(c *gin.Context) {
+	BugId, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	Tags, err := h.seriveces.Bug.GetTagsByBugId(BugId)
+	if err != nil {
+		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	c.JSON(http.StatusOK, Tags) //
+}

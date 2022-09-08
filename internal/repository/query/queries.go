@@ -33,7 +33,8 @@ const (
 
 	StoreBug = `INSERT INTO bugs (bug_title, bug_description, status_id, category_id) VALUES ($1, $2, $3, $4)
 				RETURNING id, bug_title, bug_description, is_completed, status_id, category_id`
-	GetAllBugs = `SELECT id, bug_title, bug_description, is_completed, status_id, category_id FROM bugs`
-	CloseIssue = `UPDATE bugs SET is_completed=true WHERE id=$1`
-	AddTag     = `INSERT INTO bugs_tags(bug_id, tag_id) VALUES ($1, $2)`
+	GetAllBugs     = `SELECT id, bug_title, bug_description, is_completed FROM bugs`
+	CloseIssue     = `UPDATE bugs SET is_completed=true WHERE id=$1`
+	AddTag         = `INSERT INTO bugs_tags(bug_id, tag_id) VALUES ($1, $2)`
+	GetTagsByBugId = `select t.id, t.tag_name from tags t  inner join bugs_tags on t.id = bugs_tags.tag_id where bug_id = $1`
 )

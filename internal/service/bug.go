@@ -17,7 +17,7 @@ func (s *BugService) StoreBug(Bug dto.Bug) (dto.Bug, error) {
 	return s.repo.StoreBug(Bug)
 }
 
-func (s *BugService) GetAllBug() ([]dto.Bug, error) {
+func (s *BugService) GetAllBug() ([]dto.AllBugs, error) {
 	return s.repo.GetAllBug()
 }
 
@@ -27,4 +27,8 @@ func (s *BugService) CloseIssue(BugId int) error {
 
 func (s *BugService) AddTag(Tags dto.BugTag, BugId int) error {
 	return s.repo.AddTag(Tags, BugId)
+}
+
+func (s *BugService) GetTagsByBugId(BugId int) ([]dto.Tag, error) {
+	return s.repo.GetTagsByBugId(BugId)
 }

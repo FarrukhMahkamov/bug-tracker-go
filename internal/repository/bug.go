@@ -2,7 +2,7 @@ package repository
 
 import (
 	"github.com/FarrukhMahkamov/bugtracker/internal/dto"
-	"github.com/FarrukhMahkamov/bugtracker/internal/repository/query"
+	query "github.com/FarrukhMahkamov/bugtracker/internal/repository/query"
 	"github.com/jmoiron/sqlx"
 )
 
@@ -33,8 +33,8 @@ func (r *BugPostgres) StoreBug(Bug dto.Bug) (dto.Bug, error) {
 	return StoredBug, nil
 }
 
-func (r *BugPostgres) GetAllBug() ([]dto.Bug, error) {
-	var Bugs []dto.Bug
+func (r *BugPostgres) GetAllBug() ([]dto.AllBugs, error) {
+	var Bugs []dto.AllBugs
 
 	err := r.db.Select(&Bugs, query.GetAllBugs)
 
@@ -55,4 +55,12 @@ func (r *BugPostgres) AddTag(Tags dto.BugTag, BugId int) error {
 		}
 	}
 	return nil
+}
+
+func (r *BugPostgres) GetTagsByBugId(BugId int) ([]dto.Tag, error) {
+	var Tags []dto.Tag
+
+	err := r.db.Select(&Tags, query.GetTagsByBugId, BugId)
+
+	return Tags, err
 }
