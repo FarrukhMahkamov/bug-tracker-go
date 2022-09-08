@@ -17,3 +17,7 @@ type BugUpdate struct {
 	CategoryId     int    `json:"category_id" db:"category_id"`
 	StatusId       int    `json:"status_id" db:"status_id"`
 }
+
+type BugTag struct {
+	TagId []int `json:"tag_id"`
+}

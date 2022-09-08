@@ -35,4 +35,5 @@ const (
 				RETURNING id, bug_title, bug_description, is_completed, status_id, category_id`
 	GetAllBugs = `SELECT id, bug_title, bug_description, is_completed, status_id, category_id FROM bugs`
 	CloseIssue = `UPDATE bugs SET is_completed=true WHERE id=$1`
+	AddTag     = `INSERT INTO bugs_tags(bug_id, tag_id) VALUES ($1, $2)`
 )

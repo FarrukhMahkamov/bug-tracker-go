@@ -23,7 +23,7 @@ CREATE TABLE teams
 CREATE TABLE tags
 (
     id BIGSERIAL NOT NULL UNIQUE,
-    tags_name VARCHAR(255)
+    tag_name VARCHAR(255)
 );
 
 CREATE TABLE categories
@@ -48,4 +48,11 @@ CREATE TABLE bugs
     category_id INT,
     FOREIGN KEY(status_id) REFERENCES statuses(id) ON DELETE SET NULL,
     FOREIGN KEY(category_id) REFERENCES categories(id) ON DELETE SET NULL
+);
+
+CREATE TABLE bugs_tags
+(
+    id BIGSERIAL NOT NULL UNIQUE,
+    bug_id INT NOT NULL REFERENCES bugs(id) ON DELETE CASCADE,
+    tag_id INT NOT NULL REFERENCES tags(id) ON DELETE CASCADE
 );

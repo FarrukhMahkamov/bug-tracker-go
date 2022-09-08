@@ -54,3 +54,29 @@ func (h *Handler) CloseIssue(c *gin.Context) {
 		Status:  http.StatusNoContent,
 	})
 }
+
+func (h *Handler) AddTag(c *gin.Context) {
+	var Tags dto.BugTag
+
+	BugId, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	if err := c.BindJSON(&Tags); err != nil {
+		response.NewErrorResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
+
+	err = h.seriveces.Bug.AddTag(Tags, BugId)
+	if err != nil {
+		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	c.JSON(http.StatusOK, response.NewSuccessResponse{
+		Message: "Tags Added Successfully",
+		Status:  http.StatusOK,
+	})
+}

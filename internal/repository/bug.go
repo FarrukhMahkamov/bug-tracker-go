@@ -46,3 +46,13 @@ func (r *BugPostgres) CloseIssue(BugId int) error {
 
 	return err
 }
+
+func (r *BugPostgres) AddTag(Tags dto.BugTag, BugId int) error {
+	for _, tags := range Tags.TagId {
+		_, err := r.db.Exec(query.AddTag, BugId, tags)
+		if err != nil {
+			return err
+		}
+	}
+	return nil
+}

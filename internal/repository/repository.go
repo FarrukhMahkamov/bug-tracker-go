@@ -53,6 +53,7 @@ type Bug interface {
 	StoreBug(Bug dto.Bug) (dto.Bug, error)
 	GetAllBug() ([]dto.Bug, error)
 	CloseIssue(BugId int) error
+	AddTag(Tags dto.BugTag, BugId int) error
 }
 type Repository struct {
 	Authorization

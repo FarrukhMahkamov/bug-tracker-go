@@ -24,3 +24,7 @@ func (s *BugService) GetAllBug() ([]dto.Bug, error) {
 func (s *BugService) CloseIssue(BugId int) error {
 	return s.repo.CloseIssue(BugId)
 }
+
+func (s *BugService) AddTag(Tags dto.BugTag, BugId int) error {
+	return s.repo.AddTag(Tags, BugId)
+}
