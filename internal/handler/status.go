@@ -91,3 +91,7 @@ func (h *Handler) DeleteStatus(c *gin.Context) {
 		Status:  http.StatusNoContent,
 	})
 }
+
+func (h *Handler) ShowBugsByStatusId(c *gin.Context) {
+
+}

@@ -67,6 +67,7 @@ func (h *Handler) InitiRoutes() *gin.Engine {
 		{
 			statuses.GET("/", h.GetAllStatus)
 			statuses.GET("/:id", h.ShowStatus)
+			statuses.GET("/:id/bugs", h.ShowBugsByStatusId)
 			statuses.POST("/", h.StoreStatus)
 			statuses.PUT("/:id", h.UpdateStatus)
 			statuses.DELETE("/:id", h.DeleteStatus)
