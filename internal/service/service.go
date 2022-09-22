@@ -56,6 +56,15 @@ type Bug interface {
 	AddTag(Tags dto.BugTag, BugId int) error
 	GetTagsByBugId(BugId int) ([]dto.Tag, error)
 }
+
+type Project interface {
+	StoreProject(Project dto.Project) (dto.Project, error)
+	GetAllProject() ([]dto.Project, error)
+	ShowProject(ProjectId int) (dto.Project, error)
+	DeleteProject(ProjectId int) error
+	UpdatedProject(Project dto.ProjectUpdate, ProjectId int) error
+}
+
 type Service struct {
 	Authortization
 	JobType
@@ -64,6 +73,7 @@ type Service struct {
 	Category
 	Status
 	Bug
+	Project
 }
 
 func NewService(repos *repository.Repository) *Service {
@@ -74,5 +84,6 @@ func NewService(repos *repository.Repository) *Service {
 		Category: NewCategoryService(repos.Category),
 		Status:   NewStatusService(repos.Status),
 		Bug:      NewBugService(repos.Bug),
+		Project:  NewPorjectService(repos.Project),
 	}
 }

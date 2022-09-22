@@ -31,6 +31,12 @@ const (
 	DeleteStatus   = `DELETE FROM statuses WHERE id=$1`
 	UpdatedStatus  = `UPDATE statuses SET status_name=$1 WHERE id=$2`
 
+	StoreProject   = `INSERT INTO categories (category_name) VALUES ($1) RETURNING id, category_name`
+	GetAllProjects = `SELECT id, category_name FROM categories`
+	ShowProject    = `SELECT id, category_name FROM categories WHERE id=$1`
+	DeleteProject  = `DELETE FROM categories WHERE id=$1`
+	UpdatedProject = `UPDATE categories SET category_name=$1 WHERE id=$2`
+
 	StoreBug = `INSERT INTO bugs (bug_title, bug_description, status_id, category_id) VALUES ($1, $2, $3, $4)
 				RETURNING id, bug_title, bug_description, is_completed, status_id, category_id`
 	GetAllBugs     = `SELECT s.status_name, b.id, b.bug_title, b.bug_description, b.is_completed, b.status_id FROM statuses s INNER JOIN bugs b ON s.id = b.id`

@@ -82,6 +82,15 @@ func (h *Handler) InitiRoutes() *gin.Engine {
 			bugs.PUT("/:id", h.CloseIssue)
 		}
 
+		projects := api.Group("/projects")
+		{
+			projects.GET("/", h.GetAllProject)
+			projects.GET("/:id", h.ShowProject)
+			projects.POST("/", h.StoreProject)
+			projects.PUT("/:id", h.UpdateProject)
+			projects.DELETE("/:id", h.DeleteProject)
+		}
+
 	}
 
 	return router

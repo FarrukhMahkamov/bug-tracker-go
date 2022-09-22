@@ -49,6 +49,14 @@ type Status interface {
 	UpdatedStatus(Status dto.StatusUpdate, StatusId int) error
 }
 
+type Project interface {
+	StoreProject(Project dto.Project) (dto.Project, error)
+	GetAllProject() ([]dto.Project, error)
+	ShowProject(ProjectId int) (dto.Project, error)
+	DeleteProject(ProjectId int) error
+	UpdatedProject(Project dto.ProjectUpdate, ProjectId int) error
+}
+
 type Bug interface {
 	StoreBug(Bug dto.Bug) (dto.Bug, error)
 	GetAllBug() ([]dto.AllBugs, error)
@@ -64,6 +72,7 @@ type Repository struct {
 	Category
 	Status
 	Bug
+	Project
 }
 
 func NewRepository(db *sqlx.DB) *Repository {
@@ -74,5 +83,6 @@ func NewRepository(db *sqlx.DB) *Repository {
 		Category: NewCategoryPostgers(db),
 		Status:   NewStatusPostgers(db),
 		Bug:      NewBugPostgers(db),
+		Project:  NewProjectPostgres(db),
 	}
 }
