@@ -7,6 +7,7 @@ import (
 )
 
 type Authorization interface {
+	RegisterUser(user dto.User) (dto.UserForUi, error)
 }
 
 type JobType interface {
@@ -77,12 +78,13 @@ type Repository struct {
 
 func NewRepository(db *sqlx.DB) *Repository {
 	return &Repository{
-		JobType:  NewJobTypePostgers(db),
-		Team:     NewTeamPostgers(db),
-		Tag:      NewTagPostgers(db),
-		Category: NewCategoryPostgers(db),
-		Status:   NewStatusPostgers(db),
-		Bug:      NewBugPostgers(db),
-		Project:  NewProjectPostgres(db),
+		Authorization: NewAuthPostgres(db),
+		JobType:       NewJobTypePostgers(db),
+		Team:          NewTeamPostgers(db),
+		Tag:           NewTagPostgers(db),
+		Category:      NewCategoryPostgers(db),
+		Status:        NewStatusPostgers(db),
+		Bug:           NewBugPostgers(db),
+		Project:       NewProjectPostgres(db),
 	}
 }

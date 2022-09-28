@@ -1,6 +1,8 @@
 package query
 
 const (
+	RegisterUser = `INSERT INTO users (name, username, email, password, image) VALUES ($1, $2, $3, $4, $5) RETURNING id, name, username, email, image`
+
 	StoreJobType   = `INSERT INTO job_types (job_type_name) VALUES ($1) RETURNING id, job_type_name`
 	GetAllJobTypes = `SELECT id, job_type_name FROM job_types`
 	ShowJobType    = `SELECT id, job_type_name FROM job_types WHERE id=$1`

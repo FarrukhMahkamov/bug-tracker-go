@@ -7,6 +7,7 @@ import (
 )
 
 type Authortization interface {
+	RegisterUser(user dto.User) (dto.UserForUi, error)
 }
 
 type JobType interface {
@@ -78,12 +79,13 @@ type Service struct {
 
 func NewService(repos *repository.Repository) *Service {
 	return &Service{
-		JobType:  NewJobTypeService(repos.JobType),
-		Team:     NewTeamService(repos.Team),
-		Tag:      NewTagService(repos.Tag),
-		Category: NewCategoryService(repos.Category),
-		Status:   NewStatusService(repos.Status),
-		Bug:      NewBugService(repos.Bug),
-		Project:  NewPorjectService(repos.Project),
+		Authortization: NewAuthService(repos.Authorization),
+		JobType:        NewJobTypeService(repos.JobType),
+		Team:           NewTeamService(repos.Team),
+		Tag:            NewTagService(repos.Tag),
+		Category:       NewCategoryService(repos.Category),
+		Status:         NewStatusService(repos.Status),
+		Bug:            NewBugService(repos.Bug),
+		Project:        NewPorjectService(repos.Project),
 	}
 }
