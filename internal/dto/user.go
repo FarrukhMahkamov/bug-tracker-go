@@ -12,7 +12,7 @@ type User struct {
 type UserForUi struct {
 	Id       int64   `json:"id" db:"id"`
 	Name     string  `json:"name" db:"name"`
-	UserName string  `json:"user_name" db:"user_naname"`
+	UserName string  `json:"username" db:"username"`
 	Email    string  `json:"email" db:"email"`
 	Image    *string `json:"image" db:"image"`
 	Token    *string `json:"token"`

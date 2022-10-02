@@ -2,7 +2,7 @@ package query
 
 const (
 	RegisterUser = `INSERT INTO users (name, username, email, password, image) VALUES ($1, $2, $3, $4, $5) RETURNING id, name, username, email, image`
-	GetUser      = `SELECT id FROM users WHERE email=$1 AND password=$2`
+	GetUser      = `SELECT id, username, email, image FROM users WHERE email=$1 AND password=$2`
 
 	StoreJobType   = `INSERT INTO job_types (job_type_name) VALUES ($1) RETURNING id, job_type_name`
 	GetAllJobTypes = `SELECT id, job_type_name FROM job_types`
