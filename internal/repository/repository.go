@@ -8,6 +8,8 @@ import (
 
 type Authorization interface {
 	RegisterUser(user dto.User) (dto.UserForUi, error)
+	GetUser(username, password string) (dto.User, error)
+	FindUser(username, password string) (dto.UserForUi, error)
 }
 
 type JobType interface {

@@ -5,7 +5,7 @@ type User struct {
 	Name     string  `json:"name" db:"name" binding:"required"`
 	UserName string  `json:"username" db:"username" binding:"required"`
 	Email    string  `json:"email" db:"email" binding:"required"`
-	Password string  `json:"password" db:"password"`
+	Password string  `json:"password" db:"password" binding:"required"`
 	Image    *string `json:"image" db:"image"`
 }
 
@@ -15,4 +15,10 @@ type UserForUi struct {
 	UserName string  `json:"user_name" db:"user_naname"`
 	Email    string  `json:"email" db:"email"`
 	Image    *string `json:"image" db:"image"`
+	Token    *string `json:"token"`
+}
+
+type UserSignInFields struct {
+	Email    string `json:"email" db:"email" binding:"required"`
+	Password string `json:"password" db:"password" binding:"required"`
 }

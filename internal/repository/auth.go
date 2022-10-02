@@ -31,3 +31,17 @@ func (r *AuthPostgres) RegisterUser(user dto.User) (dto.UserForUi, error) {
 
 	return RegisteredUser, nil
 }
+
+func (r *AuthPostgres) GetUser(email, password string) (dto.User, error) {
+	var user dto.User
+	err := r.db.Get(&user, query.GetUser, email, password)
+
+	return user, err
+}
+
+func (r *AuthPostgres) FindUser(email, password string) (dto.UserForUi, error) {
+	var user dto.UserForUi
+	err := r.db.Get(&user, query.GetUser, email, password)
+
+	return user, err
+}
