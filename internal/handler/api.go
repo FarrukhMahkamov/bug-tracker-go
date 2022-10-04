@@ -24,7 +24,7 @@ func (h *Handler) InitiRoutes() *gin.Engine {
 	}
 
 	//Api routes
-	api := router.Group("/api")
+	api := router.Group("/api", h.Auth)
 	{
 		//Routes for job types
 		jobType := api.Group("/job-types")

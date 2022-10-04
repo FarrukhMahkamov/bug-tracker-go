@@ -10,6 +10,7 @@ type Authortization interface {
 	RegisterUser(user dto.User) (dto.UserForUi, error)
 	SignInUser(email, password string) (string, error)
 	GetUser(email, password string) (dto.UserForUi, error)
+	ParseToken(token string) (int64, error)
 }
 
 type JobType interface {
