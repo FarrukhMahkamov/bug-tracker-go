@@ -1,1 +1,1 @@
-SELECT * FROM users
+UPDATE schema_migrations SET version='000001', dirty=FALSE

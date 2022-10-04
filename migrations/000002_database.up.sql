@@ -5,7 +5,8 @@ CREATE TABLE users
     username VARCHAR(255) NOT NULL UNIQUE,
     email VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
-    image TEXT DEFAULT NULL
+    image TEXT DEFAULT NULL,
+    role VARCHAR(50) DEFAULT 'engineer'
 );
 
 CREATE TABLE job_types
