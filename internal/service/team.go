@@ -32,3 +32,7 @@ func (s *TeamService) DeleteTeam(TeamId int) error {
 func (s *TeamService) UpdatedTeam(Team dto.TeamUpdate, TeamId int) error {
 	return s.repo.UpdatedTeam(Team, TeamId)
 }
+
+func (s *TeamService) AddUsersToTeam(TeamId int, Users dto.TeamUsers) error {
+	return s.repo.AddUsersToTeam(TeamId, Users)
+}

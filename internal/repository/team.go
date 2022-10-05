@@ -53,3 +53,13 @@ func (r *TeamPostgres) UpdatedTeam(Team dto.TeamUpdate, TeamId int) error {
 
 	return err
 }
+
+func (r *TeamPostgres) AddUsersToTeam(TeamId int, Users dto.TeamUsers) error {
+	for _, users := range Users.UserId {
+		_, err := r.db.Exec(query.AddUserToProject, TeamId, users)
+		if err != nil {
+			return err
+		}
+	}
+	return nil
+}

@@ -8,3 +8,7 @@ type Team struct {
 type TeamUpdate struct {
 	TeamName string `json:"team_name" db:"team_name"`
 }
+
+type TeamUsers struct {
+	UserId []int `json:"user_id"`
+}
