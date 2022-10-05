@@ -58,6 +58,7 @@ type Project interface {
 	ShowProject(ProjectId int) (dto.Project, error)
 	DeleteProject(ProjectId int) error
 	UpdatedProject(Project dto.ProjectUpdate, ProjectId int) error
+	AddUserToProject(ProjectId int, Users dto.ProjectUser) error
 }
 
 type Bug interface {

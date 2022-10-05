@@ -53,3 +53,13 @@ func (r *ProjectPostgres) UpdatedProject(Project dto.ProjectUpdate, ProjectId in
 
 	return err
 }
+
+func (r *ProjectPostgres) AddUserToProject(ProjectId int, Users dto.ProjectUser) error {
+	for _, users := range Users.UserId {
+		_, err := r.db.Exec(query.AddUserToProject, ProjectId, users)
+		if err != nil {
+			return err
+		}
+	}
+	return nil
+}

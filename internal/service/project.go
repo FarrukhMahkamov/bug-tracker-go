@@ -32,3 +32,7 @@ func (s *ProjectService) DeleteProject(ProjectId int) error {
 func (s *ProjectService) UpdatedProject(Project dto.ProjectUpdate, ProjectId int) error {
 	return s.repo.UpdatedProject(Project, ProjectId)
 }
+
+func (s *ProjectService) AddUserToProject(ProjectId int, Users dto.ProjectUser) error {
+	return s.repo.AddUserToProject(ProjectId, Users)
+}
