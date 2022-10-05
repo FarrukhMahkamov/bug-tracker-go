@@ -33,6 +33,6 @@ func (s *ProjectService) UpdatedProject(Project dto.ProjectUpdate, ProjectId int
 	return s.repo.UpdatedProject(Project, ProjectId)
 }
 
-func (s *ProjectService) AddUserToProject(ProjectId int, Users dto.ProjectUser) error {
+func (s *ProjectService) AddUserToProject(Users dto.ProjectUser, ProjectId int) error {
 	return s.repo.AddUserToProject(ProjectId, Users)
 }

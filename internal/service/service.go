@@ -68,7 +68,7 @@ type Project interface {
 	ShowProject(ProjectId int) (dto.Project, error)
 	DeleteProject(ProjectId int) error
 	UpdatedProject(Project dto.ProjectUpdate, ProjectId int) error
-	AddUserToProject(ProjectId int, Users dto.ProjectUser) error
+	AddUserToProject(Users dto.ProjectUser, ProjectId int) error
 }
 
 type Service struct {

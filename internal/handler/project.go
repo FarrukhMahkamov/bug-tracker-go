@@ -73,6 +73,7 @@ func (h *Handler) UpdateProject(c *gin.Context) {
 	})
 
 }
+
 func (h *Handler) DeleteProject(c *gin.Context) {
 	ProjectId, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
@@ -90,4 +91,25 @@ func (h *Handler) DeleteProject(c *gin.Context) {
 		Message: "Deleted Successfully",
 		Status:  http.StatusNoContent,
 	})
+}
+
+func (h *Handler) AddUsersToProject(c *gin.Context) {
+	var Users dto.ProjectUser
+	ProjectId, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	if err := c.BindJSON(&Users); err != nil {
+		response.NewErrorResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
+
+	err = h.seriveces.Project.AddUserToProject(Users, ProjectId)
+	if err != nil {
+		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
 }
