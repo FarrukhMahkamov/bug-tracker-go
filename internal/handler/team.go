@@ -91,3 +91,29 @@ func (h *Handler) DeleteTeam(c *gin.Context) {
 		Status:  http.StatusNoContent,
 	})
 }
+
+func (h *Handler) AddUsersToTeam(c *gin.Context) {
+	var Users dto.TeamUsers
+	TeamId, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	if err := c.BindJSON(&Users); err != nil {
+		response.NewErrorResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
+
+	err = h.seriveces.Team.AddUsersToTeam(TeamId, Users)
+	if err != nil {
+		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	c.JSON(http.StatusOK, response.NewSuccessResponse{
+		Message: "Users added successfully",
+		Status:  http.StatusNoContent,
+	})
+
+}

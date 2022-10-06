@@ -112,4 +112,9 @@ func (h *Handler) AddUsersToProject(c *gin.Context) {
 		return
 	}
 
+	c.JSON(http.StatusOK, response.NewSuccessResponse{
+		Message: "Users added successfully",
+		Status:  http.StatusNoContent,
+	})
+
 }
