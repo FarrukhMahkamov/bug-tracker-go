@@ -16,8 +16,8 @@ type UserForUi struct {
 	Email    string  `json:"email" db:"email"`
 	Image    *string `json:"image" db:"image"`
 	Token    *string `json:"token"`
+	Role     string  `json:"role" db:"role"`
 }
-
 
 type UserSignInFields struct {
 	Email    string `json:"email" db:"email" binding:"required"`

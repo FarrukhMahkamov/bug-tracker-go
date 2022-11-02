@@ -48,7 +48,5 @@ const (
 	CloseIssue     = `UPDATE bugs SET is_completed=true WHERE id=$1`
 	AddTag         = `INSERT INTO bugs_tags(bug_id, tag_id) VALUES ($1, $2)`
 	GetTagsByBugId = `SELECT t.id, t.tag_name FROM tags t  INNER JOIN bugs_tags on t.id = bugs_tags.tag_id WHERE bug_id = $1`
-	GetTeamUsers   = `SELET u.id, u.name, u.username, u.email, u.image, u.role 
-					  FROM users u INNER JOIN  teams_users t u.id = t.id
-					  WHERE t.id = $1`
+	GetTeamUsers   = `SELECT u.id, u.name, u.username, u.email, u.image, u.role FROM users u INNER JOIN teams_users t ON u.id = t.user_id WHERE team_id = $1`
 )
