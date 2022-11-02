@@ -63,3 +63,11 @@ func (r *TeamPostgres) AddUsersToTeam(TeamId int, Users dto.TeamUsers) error {
 	}
 	return nil
 }
+
+func (r *TeamPostgres) GetTeamUsers(TeamId int) ([]dto.UserForUi, error) {
+	var Users []dto.UserForUi
+
+	err := r.db.Select(&Users, query.GetTeamUsers, TeamId)
+
+	return Users, err
+}

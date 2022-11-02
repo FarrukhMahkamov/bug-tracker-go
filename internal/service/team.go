@@ -36,3 +36,7 @@ func (s *TeamService) UpdatedTeam(Team dto.TeamUpdate, TeamId int) error {
 func (s *TeamService) AddUsersToTeam(TeamId int, Users dto.TeamUsers) error {
 	return s.repo.AddUsersToTeam(TeamId, Users)
 }
+
+func (s *TeamService) GetTeamUsers(TeamId int) ([]dto.UserForUi, error) {
+	return s.repo.GetTeamUsers(TeamId)
+}

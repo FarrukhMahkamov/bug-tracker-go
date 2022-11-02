@@ -47,5 +47,8 @@ const (
 	GetAllBugs     = `SELECT s.status_name, b.id, b.bug_title, b.bug_description, b.is_completed, b.status_id FROM statuses s INNER JOIN bugs b ON s.id = b.id`
 	CloseIssue     = `UPDATE bugs SET is_completed=true WHERE id=$1`
 	AddTag         = `INSERT INTO bugs_tags(bug_id, tag_id) VALUES ($1, $2)`
-	GetTagsByBugId = `select t.id, t.tag_name from tags t  inner join bugs_tags on t.id = bugs_tags.tag_id where bug_id = $1`
+	GetTagsByBugId = `SELECT t.id, t.tag_name FROM tags t  INNER JOIN bugs_tags on t.id = bugs_tags.tag_id WHERE bug_id = $1`
+	GetTeamUsers   = `SELET u.id, u.name, u.username, u.email, u.image, u.role 
+					  FROM users u INNER JOIN  teams_users t u.id = t.id
+					  WHERE t.id = $1`
 )

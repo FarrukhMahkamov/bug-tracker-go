@@ -18,6 +18,7 @@ type UserForUi struct {
 	Token    *string `json:"token"`
 }
 
+
 type UserSignInFields struct {
 	Email    string `json:"email" db:"email" binding:"required"`
 	Password string `json:"password" db:"password" binding:"required"`

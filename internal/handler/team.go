@@ -117,3 +117,20 @@ func (h *Handler) AddUsersToTeam(c *gin.Context) {
 	})
 
 }
+
+func (h *Handler) GetTeamUsers(c *gin.Context) {
+	TeamId, err := strconv.Atoi(c.Param("id"))
+
+	if err != nil {
+		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	Users, err := h.seriveces.Team.GetTeamUsers(TeamId)
+	if err != nil {
+		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	c.JSON(http.StatusOK, Users)
+}
