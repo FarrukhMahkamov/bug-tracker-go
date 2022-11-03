@@ -36,11 +36,11 @@ const (
 	DeleteStatus   = `DELETE FROM statuses WHERE id=$1`
 	UpdatedStatus  = `UPDATE statuses SET status_name=$1 WHERE id=$2`
 
-	StoreProject     = `INSERT INTO categories (category_name) VALUES ($1) RETURNING id, category_name`
-	GetAllProjects   = `SELECT id, category_name FROM categories`
-	ShowProject      = `SELECT id, category_name FROM categories WHERE id=$1`
-	DeleteProject    = `DELETE FROM categories WHERE id=$1`
-	UpdatedProject   = `UPDATE categories SET category_name=$1 WHERE id=$2`
+	StoreProject     = `INSERT INTO projects (project_name) VALUES ($1) RETURNING id, project_name`
+	GetAllProjects   = `SELECT id, project_name FROM projects`
+	ShowProject      = `SELECT id, project_name FROM projects WHERE id=$1`
+	DeleteProject    = `DELETE FROM projects WHERE id=$1`
+	UpdatedProject   = `UPDATE projects SET project_name=$1 WHERE id=$2`
 	AddUserToProject = `INSERT INTO projects_users(project_id, user_id) VALUES ($1, $2)`
 
 	StoreBug = `INSERT INTO bugs (bug_title, bug_description, status_id, category_id) VALUES ($1, $2, $3, $4)
