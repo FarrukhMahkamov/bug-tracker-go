@@ -71,3 +71,14 @@ func (r *TeamPostgres) GetTeamUsers(TeamId int) ([]dto.UserForUi, error) {
 
 	return Users, err
 }
+
+func (r *TeamPostgres) RemoveUsersFromTeam(TeamId int, Users dto.TeamUsers) error {
+	for _, users := range Users.UserId {
+		_, err := r.db.Exec(query.RemoveUsersFromTeam, TeamId, users)
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
+}

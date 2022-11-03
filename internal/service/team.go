@@ -40,3 +40,7 @@ func (s *TeamService) AddUsersToTeam(TeamId int, Users dto.TeamUsers) error {
 func (s *TeamService) GetTeamUsers(TeamId int) ([]dto.UserForUi, error) {
 	return s.repo.GetTeamUsers(TeamId)
 }
+
+func (s *TeamService) RemoveUsersFromTeam(TeamId int, Users dto.TeamUsers) error {
+	return s.repo.RemoveUsersFromTeam(TeamId, Users)
+}

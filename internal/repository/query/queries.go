@@ -10,12 +10,13 @@ const (
 	DeleteJobType  = `DELETE FROM job_types WHERE id=$1`
 	UpdatedJobType = `UPDATE job_types SET job_type_name=$1 WHERE id=$2`
 
-	StoreTeam     = `INSERT INTO teams (team_name) VALUES ($1) RETURNING id, team_name`
-	GetAllTeams   = `SELECT id, team_name FROM teams`
-	ShowTeam      = `SELECT id, team_name FROM teams WHERE id=$1`
-	DeleteTeam    = `DELETE FROM teams WHERE id=$1`
-	UpdatedTeam   = `UPDATE teams SET team_name=$1 WHERE id=$2`
-	AddUserToTeam = `INSERT INTO teams_users(team_id, user_id) VALUES ($1, $2)`
+	StoreTeam           = `INSERT INTO teams (team_name) VALUES ($1) RETURNING id, team_name`
+	GetAllTeams         = `SELECT id, team_name FROM teams`
+	ShowTeam            = `SELECT id, team_name FROM teams WHERE id=$1`
+	DeleteTeam          = `DELETE FROM teams WHERE id=$1`
+	UpdatedTeam         = `UPDATE teams SET team_name=$1 WHERE id=$2`
+	AddUserToTeam       = `INSERT INTO teams_users(team_id, user_id) VALUES ($1, $2)`
+	RemoveUsersFromTeam = `DELETE FROM teams_users WHERE team_id = $1 AND user_id = $2`
 
 	StoreTag   = `INSERT INTO tags (tag_name) VALUES ($1) RETURNING id, tag_name`
 	GetAllTags = `SELECT id, tag_name FROM tags`

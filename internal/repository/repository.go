@@ -28,6 +28,7 @@ type Team interface {
 	UpdatedTeam(Team dto.TeamUpdate, TeamId int) error
 	AddUsersToTeam(TeamId int, Users dto.TeamUsers) error
 	GetTeamUsers(TeamId int) ([]dto.UserForUi, error)
+	RemoveUsersFromTeam(TeamId int, Users dto.TeamUsers) error
 }
 
 type Tag interface {

@@ -134,3 +134,28 @@ func (h *Handler) GetTeamUsers(c *gin.Context) {
 
 	c.JSON(http.StatusOK, Users)
 }
+
+func (h *Handler) RemoveUsersFromTeam(c *gin.Context) {
+	var Users dto.TeamUsers
+	TeamId, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	if err := c.BindJSON(&Users); err != nil {
+		response.NewErrorResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
+
+	err = h.seriveces.Team.RemoveUsersFromTeam(TeamId, Users)
+	if err != nil {
+		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	c.JSON(http.StatusOK, response.NewSuccessResponse{
+		Message: "Users removed successfully",
+		Status:  http.StatusNoContent,
+	})
+}

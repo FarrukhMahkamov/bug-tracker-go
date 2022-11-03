@@ -45,6 +45,7 @@ func (h *Handler) InitiRoutes() *gin.Engine {
 			teams.DELETE("/:id", h.DeleteTeam)
 			teams.POST("/:id/add-users", h.AddUsersToTeam)
 			teams.GET("/:id/team-users", h.GetTeamUsers)
+			teams.DELETE("/:id/remove-users", h.RemoveUsersFromTeam)
 		}
 
 		tags := api.Group("/tags")
