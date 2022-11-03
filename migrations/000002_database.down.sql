@@ -1,7 +1,8 @@
 DROP TABLE bugs_tags;
 
-
 DROP TABLE projects_users;
+
+DROP TABLE projects_teams;
 
 DROP TABLE bugs_users;
 
@@ -21,6 +22,7 @@ DROP TABLE categories;
 
 DROP TABLE statuses;
 
+DROP TABLE projects;
 
 
 

@@ -39,6 +39,12 @@ CREATE TABLE statuses
     status_name VARCHAR(255)
 );
 
+CREATE TABLE projects
+(
+    id BIGSERIAL NOT NULL UNIQUE,
+    project_name VARCHAR(255)
+);
+
 CREATE TABLE bugs
 (
     id BIGSERIAL NOT NULL UNIQUE,
@@ -47,6 +53,8 @@ CREATE TABLE bugs
     is_completed BOOLEAN DEFAULT FALSE,
     status_id INT,
     category_id INT,
+    project_id INT,
+    FOREIGN KEY(project_id) REFERENCES projects(id) ON DELETE SET NULL,
     FOREIGN KEY(status_id) REFERENCES statuses(id) ON DELETE SET NULL,
     FOREIGN KEY(category_id) REFERENCES categories(id) ON DELETE SET NULL
 );
@@ -61,7 +69,7 @@ CREATE TABLE bugs_tags
 CREATE TABLE projects_users
 (
     id BIGSERIAL NOT NULL UNIQUE,
-    poroject_id INT NOT NULL REFERENCES bugs(id) ON DELETE CASCADE,
+    poroject_id INT NOT NULL REFERENCES projects(id) ON DELETE CASCADE,
     user_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE
 );
 
@@ -79,3 +87,8 @@ CREATE TABLE teams_users
     user_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE
 );
 
+CREATE TABLE projects_teams (
+    id BIGSERIAL NOT NULL UNIQUE,
+    project_id INT NOT NULL REFERENCES projects(id) ON DELETE CASCADE,
+    team_id INT NOT NULL REFERENCES teams(id) ON DELETE CASCADE
+);

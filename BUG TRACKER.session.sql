@@ -1,1 +1,1 @@
-UPDATE schema_migrations SET version='000003', dirty=FALSE
+TRUNCATE TABLE schema_migrations;
