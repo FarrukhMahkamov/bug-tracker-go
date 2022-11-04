@@ -32,3 +32,7 @@ func (s *BugService) AddTag(Tags dto.BugTag, BugId int) error {
 func (s *BugService) GetTagsByBugId(BugId int) ([]dto.Tag, error) {
 	return s.repo.GetTagsByBugId(BugId)
 }
+
+func (s *BugService) AttachUserToBug(BugId int, Users dto.AttachUsers) error {
+	return s.repo.AttachUserToBug(BugId, Users)
+}

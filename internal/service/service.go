@@ -62,6 +62,7 @@ type Bug interface {
 	CloseIssue(BugId int) error
 	AddTag(Tags dto.BugTag, BugId int) error
 	GetTagsByBugId(BugId int) ([]dto.Tag, error)
+	AttachUserToBug(BugId int, Users dto.AttachUsers) error
 }
 
 type Project interface {

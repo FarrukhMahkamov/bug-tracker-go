@@ -96,3 +96,28 @@ func (h *Handler) GetTagsByBugId(c *gin.Context) {
 
 	c.JSON(http.StatusOK, Tags) //
 }
+
+func (h *Handler) AttachUserToBug(c *gin.Context) {
+	BugId, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	var Users dto.AttachUsers
+	if err := c.BindJSON(&Users); err != nil {
+		response.NewErrorResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
+
+	err = h.seriveces.Bug.AttachUserToBug(BugId, Users)
+	if err != nil {
+		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	c.JSON(http.StatusOK, response.NewSuccessResponse{
+		Message: "User(s) attached successfully",
+		Status:  http.StatusOK,
+	})
+}

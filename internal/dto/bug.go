@@ -7,6 +7,7 @@ type Bug struct {
 	IsCompleted    bool   `json:"is_comleted" db:"is_completed"`
 	CategoryId     int    `json:"category_id" db:"category_id"`
 	StatusId       int    `json:"status_id" db:"status_id"`
+	ProjectId      int    `json:"project_id" db:"project_id"`
 }
 
 type AllBugs struct {
@@ -29,4 +30,8 @@ type BugUpdate struct {
 
 type BugTag struct {
 	TagId []int `json:"tag_id"`
+}
+
+type AttachUsers struct {
+	UserId []int `json:"user_id"`
 }

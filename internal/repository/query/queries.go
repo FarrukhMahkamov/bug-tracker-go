@@ -18,11 +18,12 @@ const (
 	AddUserToTeam       = `INSERT INTO teams_users(team_id, user_id) VALUES ($1, $2)`
 	RemoveUsersFromTeam = `DELETE FROM teams_users WHERE team_id = $1 AND user_id = $2`
 
-	StoreTag   = `INSERT INTO tags (tag_name) VALUES ($1) RETURNING id, tag_name`
-	GetAllTags = `SELECT id, tag_name FROM tags`
-	ShowTag    = `SELECT id, tag_name FROM tags WHERE id=$1`
-	DeleteTag  = `DELETE FROM tags WHERE id=$1`
-	UpdatedTag = `UPDATE tags SET tag_name=$1 WHERE id=$2`
+	StoreTag        = `INSERT INTO tags (tag_name) VALUES ($1) RETURNING id, tag_name`
+	GetAllTags      = `SELECT id, tag_name FROM tags`
+	ShowTag         = `SELECT id, tag_name FROM tags WHERE id=$1`
+	DeleteTag       = `DELETE FROM tags WHERE id=$1`
+	UpdatedTag      = `UPDATE tags SET tag_name=$1 WHERE id=$2`
+	AttachUserToBug = `INSERT INTO bugs_users(bug_id, user_id) VALUES ($1, $2)`
 
 	StoreCategory    = `INSERT INTO categories (category_name) VALUES ($1) RETURNING id, category_name`
 	GetAllCategories = `SELECT id, category_name FROM categories`
@@ -44,8 +45,8 @@ const (
 	AddUserToProject            = `INSERT INTO projects_users(poroject_id, user_id) VALUES ($1, $2)`
 	SelectUsersIdFromTeamsUsers = `SELECT user_id FROM teams_users WHERE team_id=$1`
 
-	StoreBug = `INSERT INTO bugs (bug_title, bug_description, status_id, category_id) VALUES ($1, $2, $3, $4)
-				RETURNING id, bug_title, bug_description, is_completed, status_id, category_id`
+	StoreBug = `INSERT INTO bugs (bug_title, bug_description, status_id, category_id, project_id) VALUES ($1, $2, $3, $4, $5)
+				RETURNING id, bug_title, bug_description, is_completed, status_id, category_id, project_id`
 	GetAllBugs     = `SELECT s.status_name, b.id, b.bug_title, b.bug_description, b.is_completed, b.status_id FROM statuses s INNER JOIN bugs b ON s.id = b.id`
 	CloseIssue     = `UPDATE bugs SET is_completed=true WHERE id=$1`
 	AddTag         = `INSERT INTO bugs_tags(bug_id, tag_id) VALUES ($1, $2)`
