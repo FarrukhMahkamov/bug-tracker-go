@@ -92,3 +92,9 @@ CREATE TABLE projects_teams (
     project_id INT NOT NULL REFERENCES projects(id) ON DELETE CASCADE,
     team_id INT NOT NULL REFERENCES teams(id) ON DELETE CASCADE
 );
+
+CREATE TABLE bugs_teams (
+    id BIGSERIAL NOT NULL UNIQUE,
+    bug_id INT NOT NULL REFERENCES bugs(id) ON DELETE CASCADE,
+    team_id INT NOT NULL REFERENCES teams(id) ON DELETE CASCADE
+);

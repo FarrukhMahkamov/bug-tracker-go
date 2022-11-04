@@ -1,5 +1,7 @@
 DROP TABLE bugs_tags;
 
+DROP TABLE bugs_teams;
+
 DROP TABLE projects_users;
 
 DROP TABLE projects_teams;
