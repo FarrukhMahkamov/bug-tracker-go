@@ -27,11 +27,11 @@ func (r *ProjectPostgres) StoreProject(Project dto.Project) (dto.Project, error)
 }
 
 func (r *ProjectPostgres) GetAllProject() ([]dto.Project, error) {
-	var Categories []dto.Project
+	var Projects []dto.Project
 
-	err := r.db.Select(&Categories, query.GetAllCategories)
+	err := r.db.Select(&Projects, query.GetAllProjects)
 
-	return Categories, err
+	return Projects, err
 }
 
 func (r *ProjectPostgres) ShowProject(ProjectId int) (dto.Project, error) {
