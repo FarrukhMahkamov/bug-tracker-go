@@ -121,3 +121,29 @@ func (h *Handler) AttachUserToBug(c *gin.Context) {
 		Status:  http.StatusOK,
 	})
 }
+
+func (h *Handler) AttachTeamToBug(c *gin.Context) {
+
+	BugId, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	TeamId, err := strconv.Atoi(c.Param("team_id"))
+	if err != nil {
+		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	err = h.seriveces.Bug.AttachTeamToBug(BugId, TeamId)
+	if err != nil {
+		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	c.JSON(http.StatusOK, response.NewSuccessResponse{
+		Message: "Team attached successfully",
+		Status:  http.StatusOK,
+	})
+}

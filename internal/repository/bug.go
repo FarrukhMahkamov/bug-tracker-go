@@ -76,3 +76,26 @@ func (r *BugPostgres) AttachUserToBug(BugId int, Users dto.AttachUsers) error {
 
 	return nil
 }
+
+func (r *BugPostgres) AttachTeamToBug(BugId int, TeamId int) error {
+	var TeamUsers []int
+
+	err := r.db.Select(&TeamUsers, query.SelectUsersIdFromTeamsUsers, TeamId)
+	if err != nil {
+		return err
+	}
+
+	_, err = r.db.Exec(query.AttachTeamToBug, BugId, TeamId)
+	if err != nil {
+		return err
+	}
+
+	for _, users := range TeamUsers {
+		_, err := r.db.Exec(query.AttachUserToBug, BugId, users)
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
+}

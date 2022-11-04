@@ -65,14 +65,19 @@ func (r *ProjectPostgres) AddUserToProject(ProjectId int, Users dto.ProjectUser)
 }
 
 func (r *ProjectPostgres) AddTeamToProject(TeamId int, ProjectId int) error {
-	var ProjectUser []int
+	var TeamUsers []int
 
-	err := r.db.Select(&ProjectUser, query.SelectUsersIdFromTeamsUsers, TeamId)
+	err := r.db.Select(&TeamUsers, query.SelectUsersIdFromTeamsUsers, TeamId)
 	if err != nil {
 		return err
 	}
 
-	for _, users := range ProjectUser {
+	_, err = r.db.Exec(query.AddTeamToProject, ProjectId, TeamId)
+	if err != nil {
+		return err
+	}
+
+	for _, users := range TeamUsers {
 		_, err := r.db.Exec(query.AddUserToProject, ProjectId, users)
 		if err != nil {
 			return err

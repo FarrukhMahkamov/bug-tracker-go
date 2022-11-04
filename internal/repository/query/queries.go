@@ -23,6 +23,7 @@ const (
 	ShowTag         = `SELECT id, tag_name FROM tags WHERE id=$1`
 	DeleteTag       = `DELETE FROM tags WHERE id=$1`
 	UpdatedTag      = `UPDATE tags SET tag_name=$1 WHERE id=$2`
+	AttachTeamToBug = `INSERT INTO bugs_teams(bug_id, team_id) VALUEST ($1, $2)`
 	AttachUserToBug = `INSERT INTO bugs_users(bug_id, user_id) VALUES ($1, $2)`
 
 	StoreCategory    = `INSERT INTO categories (category_name) VALUES ($1) RETURNING id, category_name`
@@ -43,6 +44,7 @@ const (
 	DeleteProject               = `DELETE FROM projects WHERE id=$1`
 	UpdatedProject              = `UPDATE projects SET project_name=$1 WHERE id=$2`
 	AddUserToProject            = `INSERT INTO projects_users(poroject_id, user_id) VALUES ($1, $2)`
+	AddTeamToProject            = `INSERT INTO projects_teams(project_id, team_id) VALUES ($1, $2)`
 	SelectUsersIdFromTeamsUsers = `SELECT user_id FROM teams_users WHERE team_id=$1`
 
 	StoreBug = `INSERT INTO bugs (bug_title, bug_description, status_id, category_id, project_id) VALUES ($1, $2, $3, $4, $5)
