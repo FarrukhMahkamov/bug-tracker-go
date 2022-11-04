@@ -63,3 +63,21 @@ func (r *ProjectPostgres) AddUserToProject(ProjectId int, Users dto.ProjectUser)
 	}
 	return nil
 }
+
+func (r *ProjectPostgres) AddTeamToProject(TeamId int, ProjectId int) error {
+	var ProjectUser []int
+
+	err := r.db.Select(&ProjectUser, query.SelectUsersIdFromTeamsUsers, TeamId)
+	if err != nil {
+		return err
+	}
+
+	for _, users := range ProjectUser {
+		_, err := r.db.Exec(query.AddUserToProject, ProjectId, users)
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
+}

@@ -36,3 +36,7 @@ func (s *ProjectService) UpdatedProject(Project dto.ProjectUpdate, ProjectId int
 func (s *ProjectService) AddUserToProject(Users dto.ProjectUser, ProjectId int) error {
 	return s.repo.AddUserToProject(ProjectId, Users)
 }
+
+func (s *ProjectService) AddTeamToProject(TeamId int, ProjectId int) error {
+	return s.repo.AddTeamToProject(TeamId, ProjectId)
+}

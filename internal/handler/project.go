@@ -94,12 +94,13 @@ func (h *Handler) DeleteProject(c *gin.Context) {
 }
 
 func (h *Handler) AddUsersToProject(c *gin.Context) {
-	var Users dto.ProjectUser
 	ProjectId, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
 		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}
+
+	var Users dto.ProjectUser
 
 	if err := c.BindJSON(&Users); err != nil {
 		response.NewErrorResponse(c, http.StatusBadRequest, err.Error())
@@ -116,5 +117,29 @@ func (h *Handler) AddUsersToProject(c *gin.Context) {
 		Message: "Users added successfully",
 		Status:  http.StatusNoContent,
 	})
+}
 
+func (h *Handler) AddTeamToProject(c *gin.Context) {
+	ProjectId, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	TeamId, err := strconv.Atoi(c.Param("team_id"))
+	if err != nil {
+		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	err = h.seriveces.Project.AddTeamToProject(TeamId, ProjectId)
+	if err != nil {
+		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+	
+	c.JSON(http.StatusOK, response.NewSuccessResponse{
+		Message: "Users added successfully",
+		Status:  http.StatusNoContent,
+	})
 }

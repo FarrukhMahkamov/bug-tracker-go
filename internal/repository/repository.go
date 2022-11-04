@@ -62,6 +62,7 @@ type Project interface {
 	DeleteProject(ProjectId int) error
 	UpdatedProject(Project dto.ProjectUpdate, ProjectId int) error
 	AddUserToProject(ProjectId int, Users dto.ProjectUser) error
+	AddTeamToProject(TeamId int, ProjectId int) error
 }
 
 type Bug interface {

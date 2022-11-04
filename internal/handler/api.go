@@ -92,7 +92,8 @@ func (h *Handler) InitiRoutes() *gin.Engine {
 			projects.POST("/", h.StoreProject)
 			projects.PUT("/:id", h.UpdateProject)
 			projects.DELETE("/:id", h.DeleteProject)
-			projects.POST("/:id", h.AddUsersToProject)
+			projects.POST("/:id/add-users", h.AddUsersToProject)
+			projects.POST("/:id/add-team/:team_id", h.AddTeamToProject)
 		}
 
 	}

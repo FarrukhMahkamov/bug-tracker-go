@@ -13,3 +13,7 @@ type ProjectUpdate struct {
 type ProjectUser struct {
 	UserId []int `json:"user_id"`
 }
+
+type ProjectTeam struct {
+	TeamId []int `json:"team_id"`
+}

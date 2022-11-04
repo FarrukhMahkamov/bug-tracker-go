@@ -12,6 +12,8 @@ import (
 
 func main() {
 
+	
+
 	if err := InitConfig(); err != nil {
 		logrus.Fatalf("Error while reading config: %s", err.Error())
 	}
