@@ -6,11 +6,11 @@ import (
 )
 
 type Handler struct {
-	seriveces *service.Service
+	services *service.Service
 }
 
 func NewHandler(services *service.Service) *Handler {
-	return &Handler{seriveces: services}
+	return &Handler{services: services}
 }
 
 func (h *Handler) InitiRoutes() *gin.Engine {
@@ -96,6 +96,7 @@ func (h *Handler) InitiRoutes() *gin.Engine {
 			projects.DELETE("/:id", h.DeleteProject)
 			projects.POST("/:id/add-users", h.AddUsersToProject)
 			projects.POST("/:id/add-team/:team_id", h.AddTeamToProject)
+			projects.GET("/:id/bugs", h.GetAttachedBugs)
 		}
 
 	}

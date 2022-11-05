@@ -10,7 +10,7 @@ import (
 )
 
 func (h *Handler) GetAllProject(c *gin.Context) {
-	Projects, err := h.seriveces.Project.GetAllProject()
+	Projects, err := h.services.Project.GetAllProject()
 	if err != nil {
 		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
@@ -26,7 +26,7 @@ func (h *Handler) ShowProject(c *gin.Context) {
 		return
 	}
 
-	Project, err := h.seriveces.Project.ShowProject(ProjectId)
+	Project, err := h.services.Project.ShowProject(ProjectId)
 	if err != nil {
 		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
@@ -43,7 +43,7 @@ func (h *Handler) StoreProject(c *gin.Context) {
 		return
 	}
 
-	StoredProject, err := h.seriveces.Project.StoreProject(input)
+	StoredProject, err := h.services.Project.StoreProject(input)
 	if err != nil {
 		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
@@ -61,7 +61,7 @@ func (h *Handler) UpdateProject(c *gin.Context) {
 
 	var input dto.ProjectUpdate
 
-	err = h.seriveces.Project.UpdatedProject(input, ProjectId)
+	err = h.services.Project.UpdatedProject(input, ProjectId)
 	if err != nil {
 		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
@@ -81,7 +81,7 @@ func (h *Handler) DeleteProject(c *gin.Context) {
 		return
 	}
 
-	err = h.seriveces.Project.DeleteProject(ProjectId)
+	err = h.services.Project.DeleteProject(ProjectId)
 	if err != nil {
 		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
@@ -107,7 +107,7 @@ func (h *Handler) AddUsersToProject(c *gin.Context) {
 		return
 	}
 
-	err = h.seriveces.Project.AddUserToProject(Users, ProjectId)
+	err = h.services.Project.AddUserToProject(Users, ProjectId)
 	if err != nil {
 		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
@@ -132,14 +132,37 @@ func (h *Handler) AddTeamToProject(c *gin.Context) {
 		return
 	}
 
-	err = h.seriveces.Project.AddTeamToProject(TeamId, ProjectId)
+	err = h.services.Project.AddTeamToProject(TeamId, ProjectId)
 	if err != nil {
 		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}
-	
+
 	c.JSON(http.StatusOK, response.NewSuccessResponse{
 		Message: "Users added successfully",
 		Status:  http.StatusNoContent,
 	})
+}
+
+func (h *Handler) GetAttachedBugs(c *gin.Context) {
+	UserId, err := GetUserId(c)
+
+	if err != nil {
+		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	ProjectId, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	Bugs, err := h.services.Project.GetBugsByProjectId(UserId, ProjectId)
+	if err != nil {
+		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	c.JSON(http.StatusOK, Bugs)
 }

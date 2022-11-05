@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"errors"
 	"net/http"
 	"strings"
 
@@ -9,32 +10,47 @@ import (
 )
 
 const (
-	AuthorizationHeader = "Authorization"
-	UserCtx             = "userId"
+	authorizationHeader = "Authorization"
+	userCtx             = "userId"
 )
 
 func (h *Handler) Auth(c *gin.Context) {
-	// GET HEADER
-	header := c.GetHeader(AuthorizationHeader)
+	header := c.GetHeader(authorizationHeader)
 	if header == "" {
-		response.NewErrorResponse(c, http.StatusUnauthorized, "Empty auth header!")
+		response.NewErrorResponse(c, http.StatusUnauthorized, "empty auth header")
 		return
 	}
 
-	// SPLIT HEADER
 	headerParts := strings.Split(header, " ")
-	if len(headerParts) != 2 {
-		response.NewErrorResponse(c, http.StatusUnauthorized, "Invalid auth header!")
+	if len(headerParts) != 2 || headerParts[0] != "Bearer" {
+		response.NewErrorResponse(c, http.StatusUnauthorized, "invalid auth header")
 		return
 	}
 
-	// PARSE TOKEN
+	if len(headerParts[1]) == 0 {
+		response.NewErrorResponse(c, http.StatusUnauthorized, "token is empty")
+		return
+	}
 
-	UserId, err := h.seriveces.Authortization.ParseToken(headerParts[1])
+	userId, err := h.services.Authorization.ParseToken(headerParts[1])
 	if err != nil {
 		response.NewErrorResponse(c, http.StatusUnauthorized, err.Error())
 		return
 	}
 
-	c.Set(UserCtx, UserId)
+	c.Set(userCtx, userId)
+}
+
+func GetUserId(c *gin.Context) (int, error) {
+	id, ok := c.Get(userCtx)
+	if !ok {
+		return 0, errors.New("user id not found")
+	}
+
+	idInt, ok := id.(int)
+	if !ok {
+		return 0, errors.New("user id is of invalid type")
+	}
+
+	return idInt, nil
 }

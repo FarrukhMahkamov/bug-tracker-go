@@ -10,7 +10,7 @@ import (
 )
 
 func (h *Handler) GetAllStatus(c *gin.Context) {
-	Statuss, err := h.seriveces.Status.GetAllStatus()
+	Statuss, err := h.services.Status.GetAllStatus()
 	if err != nil {
 		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
@@ -26,7 +26,7 @@ func (h *Handler) ShowStatus(c *gin.Context) {
 		return
 	}
 
-	Status, err := h.seriveces.Status.ShowStatus(StatusId)
+	Status, err := h.services.Status.ShowStatus(StatusId)
 	if err != nil {
 		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
@@ -43,7 +43,7 @@ func (h *Handler) StoreStatus(c *gin.Context) {
 		return
 	}
 
-	StoredStatus, err := h.seriveces.Status.StoreStatus(input)
+	StoredStatus, err := h.services.Status.StoreStatus(input)
 	if err != nil {
 		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
@@ -61,7 +61,7 @@ func (h *Handler) UpdateStatus(c *gin.Context) {
 
 	var input dto.StatusUpdate
 
-	err = h.seriveces.Status.UpdatedStatus(input, StatusId)
+	err = h.services.Status.UpdatedStatus(input, StatusId)
 	if err != nil {
 		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
@@ -80,7 +80,7 @@ func (h *Handler) DeleteStatus(c *gin.Context) {
 		return
 	}
 
-	err = h.seriveces.Status.DeleteStatus(StatusId)
+	err = h.services.Status.DeleteStatus(StatusId)
 	if err != nil {
 		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return

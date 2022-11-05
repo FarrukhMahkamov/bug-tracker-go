@@ -10,7 +10,7 @@ import (
 )
 
 func (h *Handler) GetAllTeam(c *gin.Context) {
-	Teams, err := h.seriveces.Team.GetAllTeam()
+	Teams, err := h.services.Team.GetAllTeam()
 	if err != nil {
 		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
@@ -26,7 +26,7 @@ func (h *Handler) ShowTeam(c *gin.Context) {
 		return
 	}
 
-	Team, err := h.seriveces.Team.ShowTeam(TeamId)
+	Team, err := h.services.Team.ShowTeam(TeamId)
 	if err != nil {
 		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
@@ -43,7 +43,7 @@ func (h *Handler) StoreTeam(c *gin.Context) {
 		return
 	}
 
-	StoredTeam, err := h.seriveces.Team.StoreTeam(input)
+	StoredTeam, err := h.services.Team.StoreTeam(input)
 	if err != nil {
 		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
@@ -61,7 +61,7 @@ func (h *Handler) UpdateTeam(c *gin.Context) {
 
 	var input dto.TeamUpdate
 
-	err = h.seriveces.Team.UpdatedTeam(input, TeamId)
+	err = h.services.Team.UpdatedTeam(input, TeamId)
 	if err != nil {
 		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
@@ -80,7 +80,7 @@ func (h *Handler) DeleteTeam(c *gin.Context) {
 		return
 	}
 
-	err = h.seriveces.Team.DeleteTeam(TeamId)
+	err = h.services.Team.DeleteTeam(TeamId)
 	if err != nil {
 		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
@@ -105,7 +105,7 @@ func (h *Handler) AddUsersToTeam(c *gin.Context) {
 		return
 	}
 
-	err = h.seriveces.Team.AddUsersToTeam(TeamId, Users)
+	err = h.services.Team.AddUsersToTeam(TeamId, Users)
 	if err != nil {
 		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
@@ -126,7 +126,7 @@ func (h *Handler) GetTeamUsers(c *gin.Context) {
 		return
 	}
 
-	Users, err := h.seriveces.Team.GetTeamUsers(TeamId)
+	Users, err := h.services.Team.GetTeamUsers(TeamId)
 	if err != nil {
 		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
@@ -148,7 +148,7 @@ func (h *Handler) RemoveUsersFromTeam(c *gin.Context) {
 		return
 	}
 
-	err = h.seriveces.Team.RemoveUsersFromTeam(TeamId, Users)
+	err = h.services.Team.RemoveUsersFromTeam(TeamId, Users)
 	if err != nil {
 		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return

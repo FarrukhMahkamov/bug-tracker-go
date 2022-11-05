@@ -46,6 +46,7 @@ const (
 	AddUserToProject            = `INSERT INTO projects_users(poroject_id, user_id) VALUES ($1, $2)`
 	AddTeamToProject            = `INSERT INTO projects_teams(project_id, team_id) VALUES ($1, $2)`
 	SelectUsersIdFromTeamsUsers = `SELECT user_id FROM teams_users WHERE team_id=$1`
+	GetBugsByProjectId          = `SELECT b.id, b.bug_title, b.bug_description, b.is_completed, b.status_id FROM bugs b INNER JOIN bugs_users u ON b.id = u.bug_id WHERE user_id = $1 AND b.project_id = $2`
 
 	StoreBug = `INSERT INTO bugs (bug_title, bug_description, status_id, category_id, project_id) VALUES ($1, $2, $3, $4, $5)
 				RETURNING id, bug_title, bug_description, is_completed, status_id, category_id, project_id`

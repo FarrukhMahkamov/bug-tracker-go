@@ -11,7 +11,7 @@ import (
 )
 
 func (h *Handler) GetAllJobType(c *gin.Context) {
-	JobTypes, err := h.seriveces.JobType.GetAllJobType()
+	JobTypes, err := h.services.JobType.GetAllJobType()
 	if err != nil {
 		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
@@ -27,7 +27,7 @@ func (h *Handler) ShowJobType(c *gin.Context) {
 		return
 	}
 
-	JobType, err := h.seriveces.JobType.ShowJobType(JobTypeId)
+	JobType, err := h.services.JobType.ShowJobType(JobTypeId)
 	if err != nil {
 		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
@@ -44,7 +44,7 @@ func (h *Handler) StoreJobType(c *gin.Context) {
 		return
 	}
 
-	StoredJobType, err := h.seriveces.JobType.StoreJobType(input)
+	StoredJobType, err := h.services.JobType.StoreJobType(input)
 	if err != nil {
 		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
@@ -62,7 +62,7 @@ func (h *Handler) UpdateJobType(c *gin.Context) {
 
 	var input dto.JobTypeUpdate
 
-	err = h.seriveces.JobType.UpdatedJobType(input, JobTypeId)
+	err = h.services.JobType.UpdatedJobType(input, JobTypeId)
 	if err != nil {
 		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
@@ -81,7 +81,7 @@ func (h *Handler) DeleteJobType(c *gin.Context) {
 		return
 	}
 
-	err = h.seriveces.JobType.DeleteJobType(JobTypeId)
+	err = h.services.JobType.DeleteJobType(JobTypeId)
 	if err != nil {
 		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return

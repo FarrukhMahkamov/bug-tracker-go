@@ -16,7 +16,7 @@ func (h *Handler) SignUp(c *gin.Context) {
 		return
 	}
 
-	RegisteredUser, err := h.seriveces.Authortization.RegisterUser(InputFields)
+	RegisteredUser, err := h.services.Authorization.RegisterUser(InputFields)
 	if err != nil {
 		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
@@ -33,13 +33,13 @@ func (h *Handler) SignIn(c *gin.Context) {
 		return
 	}
 
-	RegisteredUser, err := h.seriveces.Authortization.SignInUser(InputFields.Email, InputFields.Password)
+	RegisteredUser, err := h.services.Authorization.SignInUser(InputFields.Email, InputFields.Password)
 	if err != nil {
 		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}
 
-	GetLoginedUser, err := h.seriveces.Authortization.GetUser(InputFields.Email, InputFields.Password)
+	GetLoginedUser, err := h.services.Authorization.GetUser(InputFields.Email, InputFields.Password)
 	if err != nil {
 		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return

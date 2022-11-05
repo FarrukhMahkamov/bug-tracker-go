@@ -74,10 +74,11 @@ type Project interface {
 	UpdatedProject(Project dto.ProjectUpdate, ProjectId int) error
 	AddUserToProject(Users dto.ProjectUser, ProjectId int) error
 	AddTeamToProject(TeamId int, ProjectId int) error
+	GetBugsByProjectId(UserId int, ProjectId int) ([]dto.AllBugs, error)
 }
 
 type Service struct {
-	Authortization
+	Authorization
 	JobType
 	Team
 	Tag

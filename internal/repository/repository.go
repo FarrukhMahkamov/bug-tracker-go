@@ -63,6 +63,7 @@ type Project interface {
 	UpdatedProject(Project dto.ProjectUpdate, ProjectId int) error
 	AddUserToProject(ProjectId int, Users dto.ProjectUser) error
 	AddTeamToProject(TeamId int, ProjectId int) error
+	GetBugsByProjectId(UserId int, ProjectId int) ([]dto.AllBugs, error)
 }
 
 type Bug interface {

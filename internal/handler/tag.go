@@ -10,7 +10,7 @@ import (
 )
 
 func (h *Handler) GetAllTag(c *gin.Context) {
-	Tags, err := h.seriveces.Tag.GetAllTag()
+	Tags, err := h.services.Tag.GetAllTag()
 	if err != nil {
 		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
@@ -26,7 +26,7 @@ func (h *Handler) ShowTag(c *gin.Context) {
 		return
 	}
 
-	Tag, err := h.seriveces.Tag.ShowTag(TagId)
+	Tag, err := h.services.Tag.ShowTag(TagId)
 	if err != nil {
 		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
@@ -43,7 +43,7 @@ func (h *Handler) StoreTag(c *gin.Context) {
 		return
 	}
 
-	StoredTag, err := h.seriveces.Tag.StoreTag(input)
+	StoredTag, err := h.services.Tag.StoreTag(input)
 	if err != nil {
 		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
@@ -61,7 +61,7 @@ func (h *Handler) UpdateTag(c *gin.Context) {
 
 	var input dto.TagUpdate
 
-	err = h.seriveces.Tag.UpdatedTag(input, TagId)
+	err = h.services.Tag.UpdatedTag(input, TagId)
 	if err != nil {
 		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
@@ -80,7 +80,7 @@ func (h *Handler) DeleteTag(c *gin.Context) {
 		return
 	}
 
-	err = h.seriveces.Tag.DeleteTag(TagId)
+	err = h.services.Tag.DeleteTag(TagId)
 	if err != nil {
 		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return

@@ -86,3 +86,11 @@ func (r *ProjectPostgres) AddTeamToProject(TeamId int, ProjectId int) error {
 
 	return nil
 }
+
+func (r *ProjectPostgres) GetBugsByProjectId(UserId int, ProjectId int) ([]dto.AllBugs, error) {
+	var Bugs []dto.AllBugs
+
+	err := r.db.Select(&Bugs, query.GetBugsByProjectId, UserId, ProjectId)
+
+	return Bugs, err
+}

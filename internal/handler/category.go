@@ -10,7 +10,7 @@ import (
 )
 
 func (h *Handler) GetAllCategory(c *gin.Context) {
-	Categorys, err := h.seriveces.Category.GetAllCategory()
+	Categorys, err := h.services.Category.GetAllCategory()
 	if err != nil {
 		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
@@ -26,7 +26,7 @@ func (h *Handler) ShowCategory(c *gin.Context) {
 		return
 	}
 
-	Category, err := h.seriveces.Category.ShowCategory(CategoryId)
+	Category, err := h.services.Category.ShowCategory(CategoryId)
 	if err != nil {
 		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
@@ -43,7 +43,7 @@ func (h *Handler) StoreCategory(c *gin.Context) {
 		return
 	}
 
-	StoredCategory, err := h.seriveces.Category.StoreCategory(input)
+	StoredCategory, err := h.services.Category.StoreCategory(input)
 	if err != nil {
 		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
@@ -61,7 +61,7 @@ func (h *Handler) UpdateCategory(c *gin.Context) {
 
 	var input dto.CategoryUpdate
 
-	err = h.seriveces.Category.UpdatedCategory(input, CategoryId)
+	err = h.services.Category.UpdatedCategory(input, CategoryId)
 	if err != nil {
 		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
@@ -80,7 +80,7 @@ func (h *Handler) DeleteCategory(c *gin.Context) {
 		return
 	}
 
-	err = h.seriveces.Category.DeleteCategory(CategoryId)
+	err = h.services.Category.DeleteCategory(CategoryId)
 	if err != nil {
 		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return

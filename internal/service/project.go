@@ -40,3 +40,7 @@ func (s *ProjectService) AddUserToProject(Users dto.ProjectUser, ProjectId int) 
 func (s *ProjectService) AddTeamToProject(TeamId int, ProjectId int) error {
 	return s.repo.AddTeamToProject(TeamId, ProjectId)
 }
+
+func (s *ProjectService) GetBugsByProjectId(UserId int, ProjectId int) ([]dto.AllBugs, error) {
+	return s.repo.GetBugsByProjectId(UserId, ProjectId)
+}

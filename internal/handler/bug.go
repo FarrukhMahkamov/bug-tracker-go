@@ -10,7 +10,7 @@ import (
 )
 
 func (h *Handler) GetAllBug(c *gin.Context) {
-	Bugs, err := h.seriveces.Bug.GetAllBug()
+	Bugs, err := h.services.Bug.GetAllBug()
 	if err != nil {
 		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
@@ -27,7 +27,7 @@ func (h *Handler) StoreBug(c *gin.Context) {
 		return
 	}
 
-	StoredBug, err := h.seriveces.Bug.StoreBug(input)
+	StoredBug, err := h.services.Bug.StoreBug(input)
 	if err != nil {
 		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
@@ -43,7 +43,7 @@ func (h *Handler) CloseIssue(c *gin.Context) {
 		return
 	}
 
-	err = h.seriveces.Bug.CloseIssue(BugId)
+	err = h.services.Bug.CloseIssue(BugId)
 	if err != nil {
 		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
@@ -69,7 +69,7 @@ func (h *Handler) AddTag(c *gin.Context) {
 		return
 	}
 
-	err = h.seriveces.Bug.AddTag(Tags, BugId)
+	err = h.services.Bug.AddTag(Tags, BugId)
 	if err != nil {
 		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
@@ -88,7 +88,7 @@ func (h *Handler) GetTagsByBugId(c *gin.Context) {
 		return
 	}
 
-	Tags, err := h.seriveces.Bug.GetTagsByBugId(BugId)
+	Tags, err := h.services.Bug.GetTagsByBugId(BugId)
 	if err != nil {
 		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
@@ -110,7 +110,7 @@ func (h *Handler) AttachUserToBug(c *gin.Context) {
 		return
 	}
 
-	err = h.seriveces.Bug.AttachUserToBug(BugId, Users)
+	err = h.services.Bug.AttachUserToBug(BugId, Users)
 	if err != nil {
 		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
@@ -136,7 +136,7 @@ func (h *Handler) AttachTeamToBug(c *gin.Context) {
 		return
 	}
 
-	err = h.seriveces.Bug.AttachTeamToBug(BugId, TeamId)
+	err = h.services.Bug.AttachTeamToBug(BugId, TeamId)
 	if err != nil {
 		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
