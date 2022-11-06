@@ -6,7 +6,7 @@ import (
 	"github.com/FarrukhMahkamov/bugtracker/internal/repository"
 )
 
-type Authortization interface {
+type Authorization interface {
 	RegisterUser(user dto.User) (dto.UserForUi, error)
 	SignInUser(email, password string) (string, error)
 	GetUser(email, password string) (dto.UserForUi, error)
@@ -75,6 +75,7 @@ type Project interface {
 	AddUserToProject(Users dto.ProjectUser, ProjectId int) error
 	AddTeamToProject(TeamId int, ProjectId int) error
 	GetBugsByProjectId(UserId int, ProjectId int) ([]dto.AllBugs, error)
+	GetAttachedProjects(UserId int) ([]dto.Project, error)
 }
 
 type Service struct {
@@ -90,13 +91,13 @@ type Service struct {
 
 func NewService(repos *repository.Repository) *Service {
 	return &Service{
-		Authortization: NewAuthService(repos.Authorization),
-		JobType:        NewJobTypeService(repos.JobType),
-		Team:           NewTeamService(repos.Team),
-		Tag:            NewTagService(repos.Tag),
-		Category:       NewCategoryService(repos.Category),
-		Status:         NewStatusService(repos.Status),
-		Bug:            NewBugService(repos.Bug),
-		Project:        NewPorjectService(repos.Project),
+		Authorization: NewAuthService(repos.Authorization),
+		JobType:       NewJobTypeService(repos.JobType),
+		Team:          NewTeamService(repos.Team),
+		Tag:           NewTagService(repos.Tag),
+		Category:      NewCategoryService(repos.Category),
+		Status:        NewStatusService(repos.Status),
+		Bug:           NewBugService(repos.Bug),
+		Project:       NewPorjectService(repos.Project),
 	}
 }

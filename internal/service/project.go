@@ -44,3 +44,7 @@ func (s *ProjectService) AddTeamToProject(TeamId int, ProjectId int) error {
 func (s *ProjectService) GetBugsByProjectId(UserId int, ProjectId int) ([]dto.AllBugs, error) {
 	return s.repo.GetBugsByProjectId(UserId, ProjectId)
 }
+
+func (s *ProjectService) GetAttachedProjects(UserId int) ([]dto.Project, error) {
+	return s.repo.GetAttachedProjects(UserId)
+}

@@ -16,7 +16,6 @@ type AllBugs struct {
 	BugDescription string `json:"bug_description" db:"bug_description"`
 	IsCompleted    bool   `json:"is_comleted" db:"is_completed"`
 	StatusId       int    `json:"status_id" db:"status_id"`
-	StatusName     string `json:"status_name" db:"status_name"`
 }
 
 type BugUpdate struct {

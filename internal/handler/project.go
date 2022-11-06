@@ -145,8 +145,7 @@ func (h *Handler) AddTeamToProject(c *gin.Context) {
 }
 
 func (h *Handler) GetAttachedBugs(c *gin.Context) {
-	UserId, err := GetUserId(c)
-
+	UserId, err := strconv.Atoi(c.Param("user_id"))
 	if err != nil {
 		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
@@ -165,4 +164,20 @@ func (h *Handler) GetAttachedBugs(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, Bugs)
+}
+
+func (h *Handler) GetAttachedProjects(c *gin.Context) {
+	UserId, err := strconv.Atoi(c.Param("user_id"))
+	if err != nil {
+		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	Projects, err := h.services.Project.GetAttachedProjects(UserId)
+	if err != nil {
+		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	c.JSON(http.StatusOK, Projects)
 }

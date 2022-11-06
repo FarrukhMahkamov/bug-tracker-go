@@ -94,3 +94,11 @@ func (r *ProjectPostgres) GetBugsByProjectId(UserId int, ProjectId int) ([]dto.A
 
 	return Bugs, err
 }
+
+func (r *ProjectPostgres) GetAttachedProjects(UserId int) ([]dto.Project, error) {
+	var Projects []dto.Project
+
+	err := r.db.Select(&Projects, query.GetProjectThatAttacedUser, UserId)
+
+	return Projects, err
+}

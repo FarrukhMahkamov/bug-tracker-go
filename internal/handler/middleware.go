@@ -51,6 +51,6 @@ func GetUserId(c *gin.Context) (int, error) {
 	if !ok {
 		return 0, errors.New("user id is of invalid type")
 	}
-
+	
 	return idInt, nil
 }
