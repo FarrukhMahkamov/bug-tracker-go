@@ -75,6 +75,7 @@ type Project interface {
 	DeleteProject(ProjectId int) error
 	UpdatedProject(Project dto.ProjectUpdate, ProjectId int) error
 	AddUserToProject(Users dto.ProjectUser, ProjectId int) error
+	RemoveUsersFromProject(Users dto.ProjectUser, ProjectId int) error
 	AddTeamToProject(TeamId int, ProjectId int) error
 	GetBugsByProjectId(UserId int, ProjectId int) ([]dto.AllBugs, error)
 	GetAttachedProjects(UserId int) ([]dto.Project, error)

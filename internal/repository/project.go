@@ -102,3 +102,13 @@ func (r *ProjectPostgres) GetAttachedProjects(UserId int) ([]dto.Project, error)
 
 	return Projects, err
 }
+
+func (r *ProjectPostgres) RemoveUsersFromProject(Users dto.ProjectUser, ProjectId int) error {
+	for _, users := range Users.UserId {
+		_, err := r.db.Exec(query.RemoveUsersFromProject, ProjectId, users)
+		if err != nil {
+			return err
+		}
+	}
+	return nil
+}

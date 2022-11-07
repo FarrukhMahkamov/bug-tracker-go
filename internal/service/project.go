@@ -48,3 +48,7 @@ func (s *ProjectService) GetBugsByProjectId(UserId int, ProjectId int) ([]dto.Al
 func (s *ProjectService) GetAttachedProjects(UserId int) ([]dto.Project, error) {
 	return s.repo.GetAttachedProjects(UserId)
 }
+
+func (s *ProjectService) RemoveUsersFromProject(Users dto.ProjectUser, ProjectId int) error {
+	return s.repo.RemoveUsersFromProject(Users, ProjectId)
+}

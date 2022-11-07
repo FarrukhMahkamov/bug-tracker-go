@@ -65,6 +65,7 @@ type Project interface {
 	AddTeamToProject(TeamId int, ProjectId int) error
 	GetBugsByProjectId(UserId int, ProjectId int) ([]dto.AllBugs, error)
 	GetAttachedProjects(UserId int) ([]dto.Project, error)
+	RemoveUsersFromProject(Users dto.ProjectUser, ProjectId int) error
 }
 
 type Bug interface {

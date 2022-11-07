@@ -46,6 +46,7 @@ const (
 	DeleteProject               = `DELETE FROM projects WHERE id=$1`
 	UpdatedProject              = `UPDATE projects SET project_name=$1 WHERE id=$2`
 	AddUserToProject            = `INSERT INTO projects_users(poroject_id, user_id) VALUES ($1, $2)`
+	RemoveUsersFromProject      = `DELETE FROM projects_users WHERE poroject_id = $1 AND user_id = $2`
 	AddTeamToProject            = `INSERT INTO projects_teams(project_id, team_id) VALUES ($1, $2)`
 	SelectUsersIdFromTeamsUsers = `SELECT user_id FROM teams_users WHERE team_id=$1`
 	GetBugsByProjectId          = `SELECT b.id, b.bug_title, b.bug_description, b.is_completed, b.status_id FROM bugs b INNER JOIN bugs_users u ON b.id = u.bug_id WHERE user_id = $1 AND b.project_id = $2`
