@@ -65,6 +65,7 @@ type Bug interface {
 	AttachUserToBug(BugId int, Users dto.AttachUsers) error
 	DeattachUserFromBug(BugId int, Users dto.AttachUsers) error
 	AttachTeamToBug(BugId int, TeamId int) error
+	DetachTeamFromBug(BugId int, TeamId int) error
 }
 
 type Project interface {

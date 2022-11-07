@@ -110,3 +110,26 @@ func (r *BugPostgres) DeattachUserFromBug(BugId int, Users dto.AttachUsers) erro
 
 	return nil
 }
+
+func (r *BugPostgres) DetachTeamFromBug(BugId int, TeamId int) error {
+	var TeamUsers []int
+
+	err := r.db.Select(&TeamUsers, query.SelectUsersIdFromTeamsUsers, TeamId)
+	if err != nil {
+		return err
+	}
+
+	_, err = r.db.Exec(query.DetachTeamFromBug, BugId, TeamId)
+	if err != nil {
+		return err
+	}
+
+	for _, users := range TeamUsers {
+		_, err := r.db.Exec(query.DeattachUserFromBug, BugId, users)
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
+}

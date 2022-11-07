@@ -172,3 +172,29 @@ func (h *Handler) AttachTeamToBug(c *gin.Context) {
 		Status:  http.StatusOK,
 	})
 }
+
+func (h *Handler) DetachTeamFromBug(c *gin.Context) {
+
+	BugId, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	TeamId, err := strconv.Atoi(c.Param("team_id"))
+	if err != nil {
+		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	err = h.services.Bug.DetachTeamFromBug(BugId, TeamId)
+	if err != nil {
+		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	c.JSON(http.StatusOK, response.NewSuccessResponse{
+		Message: "Team detached successfully",
+		Status:  http.StatusOK,
+	})
+}

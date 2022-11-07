@@ -24,6 +24,7 @@ const (
 	DeleteTag           = `DELETE FROM tags WHERE id=$1`
 	UpdatedTag          = `UPDATE tags SET tag_name=$1 WHERE id=$2`
 	AttachTeamToBug     = `INSERT INTO bugs_teams(bug_id, team_id) VALUEST ($1, $2)`
+	DetachTeamFromBug   = `DELETE FROM bugs_teams WHERE bug_id = $1 AND team_id = $2`
 	AttachUserToBug     = `INSERT INTO bugs_users(bug_id, user_id) VALUES ($1, $2)`
 	DeattachUserFromBug = `DELETE FROM bugs_users WHERE bug_id = $1 AND user_id = $2`
 
