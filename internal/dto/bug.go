@@ -34,3 +34,4 @@ type BugTag struct {
 type AttachUsers struct {
 	UserId []int `json:"user_id"`
 }
+	

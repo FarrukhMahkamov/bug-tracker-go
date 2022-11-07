@@ -18,13 +18,14 @@ const (
 	AddUserToTeam       = `INSERT INTO teams_users(team_id, user_id) VALUES ($1, $2)`
 	RemoveUsersFromTeam = `DELETE FROM teams_users WHERE team_id = $1 AND user_id = $2`
 
-	StoreTag        = `INSERT INTO tags (tag_name) VALUES ($1) RETURNING id, tag_name`
-	GetAllTags      = `SELECT id, tag_name FROM tags`
-	ShowTag         = `SELECT id, tag_name FROM tags WHERE id=$1`
-	DeleteTag       = `DELETE FROM tags WHERE id=$1`
-	UpdatedTag      = `UPDATE tags SET tag_name=$1 WHERE id=$2`
-	AttachTeamToBug = `INSERT INTO bugs_teams(bug_id, team_id) VALUEST ($1, $2)`
-	AttachUserToBug = `INSERT INTO bugs_users(bug_id, user_id) VALUES ($1, $2)`
+	StoreTag            = `INSERT INTO tags (tag_name) VALUES ($1) RETURNING id, tag_name`
+	GetAllTags          = `SELECT id, tag_name FROM tags`
+	ShowTag             = `SELECT id, tag_name FROM tags WHERE id=$1`
+	DeleteTag           = `DELETE FROM tags WHERE id=$1`
+	UpdatedTag          = `UPDATE tags SET tag_name=$1 WHERE id=$2`
+	AttachTeamToBug     = `INSERT INTO bugs_teams(bug_id, team_id) VALUEST ($1, $2)`
+	AttachUserToBug     = `INSERT INTO bugs_users(bug_id, user_id) VALUES ($1, $2)`
+	DeattachUserFromBug = `DELETE FROM bugs_users WHERE bug_id = $1 AND user_id = $2`
 
 	StoreCategory    = `INSERT INTO categories (category_name) VALUES ($1) RETURNING id, category_name`
 	GetAllCategories = `SELECT id, category_name FROM categories`

@@ -84,19 +84,20 @@ func (h *Handler) InitiRoutes() *gin.Engine {
 			bugs.GET("/:id/tags", h.GetTagsByBugId)
 			bugs.PUT("/:id", h.CloseIssue)
 			bugs.POST("/:id/attach-users", h.AttachUserToBug)
+			bugs.DELETE("/:id/attach-users", h.DeattachUserFromBug)
 			bugs.POST("/:id/attach-team/:team_id", h.AttachTeamToBug)
 		}
 
 		projects := api.Group("/projects")
 		{
 			projects.GET("/", h.GetAllProject)
-			projects.GET("/:id", h.ShowProject)
 			projects.POST("/", h.StoreProject)
+			projects.GET("/:id", h.ShowProject)
 			projects.PUT("/:id", h.UpdateProject)
 			projects.DELETE("/:id", h.DeleteProject)
 			projects.POST("/:id/add-users", h.AddUsersToProject)
-			projects.POST("/:id/add-team/:team_id", h.AddTeamToProject)
 			projects.GET("/:id/bugs/:user_id", h.GetAttachedBugs)
+			projects.POST("/:id/add-team/:team_id", h.AddTeamToProject)
 			projects.GET("/attached-project/:user_id", h.GetAttachedProjects)
 		}
 

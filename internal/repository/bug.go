@@ -99,3 +99,14 @@ func (r *BugPostgres) AttachTeamToBug(BugId int, TeamId int) error {
 
 	return nil
 }
+
+func (r *BugPostgres) DeattachUserFromBug(BugId int, Users dto.AttachUsers) error {
+	for _, users := range Users.UserId {
+		_, err := r.db.Exec(query.DeattachUserFromBug, BugId, users)
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
+}

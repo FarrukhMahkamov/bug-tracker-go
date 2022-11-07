@@ -63,6 +63,7 @@ type Bug interface {
 	AddTag(Tags dto.BugTag, BugId int) error
 	GetTagsByBugId(BugId int) ([]dto.Tag, error)
 	AttachUserToBug(BugId int, Users dto.AttachUsers) error
+	DeattachUserFromBug(BugId int, Users dto.AttachUsers) error
 	AttachTeamToBug(BugId int, TeamId int) error
 }
 

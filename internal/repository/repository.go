@@ -75,6 +75,7 @@ type Bug interface {
 	GetTagsByBugId(BugId int) ([]dto.Tag, error)
 	AttachUserToBug(BugId int, Users dto.AttachUsers) error
 	AttachTeamToBug(BugId int, TeamId int) error
+	DeattachUserFromBug(BugId int, Users dto.AttachUsers) error
 }
 type Repository struct {
 	Authorization
