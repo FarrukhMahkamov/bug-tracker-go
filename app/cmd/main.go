@@ -1,6 +1,11 @@
 package main
 
 import (
+	"context"
+	"os"
+	"os/signal"
+	"syscall"
+
 	server "github.com/FarrukhMahkamov/bugtracker"
 	"github.com/FarrukhMahkamov/bugtracker/internal/handler"
 	"github.com/FarrukhMahkamov/bugtracker/internal/repository"
@@ -11,8 +16,6 @@ import (
 )
 
 func main() {
-
-	
 
 	if err := InitConfig(); err != nil {
 		logrus.Fatalf("Error while reading config: %s", err.Error())
@@ -37,8 +40,24 @@ func main() {
 	handlers := handler.NewHandler(services)
 	srv := new(server.Server)
 
-	if err := srv.Serve(viper.GetString("port"), handlers.InitiRoutes()); err != nil {
-		logrus.Fatalf("Error ocured while serivng server")
+	go func() {
+		if err := srv.Serve(viper.GetString("port"), handlers.InitiRoutes()); err != nil {
+			logrus.Fatalf("Error ocured while serivng server")
+		}
+	}()
+
+	logrus.Print("Bug Tracker shuting down")
+
+	quit := make(chan os.Signal, 1)
+	signal.Notify(quit, syscall.SIGTERM, syscall.SIGINT)
+	<-quit
+
+	if err := srv.Shutdown(context.Background()); err != nil {
+		logrus.Errorf("Error occured while shuttingdown server : %s", err.Error())
+	}
+
+	if err := db.Close(); err != nil {
+		logrus.Errorf("Error occured while closing db : %s", err.Error())
 	}
 }
 
