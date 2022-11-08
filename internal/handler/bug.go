@@ -55,6 +55,31 @@ func (h *Handler) CloseIssue(c *gin.Context) {
 	})
 }
 
+func (h *Handler) UpdateBug(c *gin.Context) {
+	BugId, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	var UpdateBug dto.BugUpdate
+	if err := c.BindJSON(&UpdateBug); err != nil {
+		response.NewErrorResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
+
+	err = h.services.Bug.UpdateBug(BugId, UpdateBug)
+	if err != nil {
+		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	c.JSON(http.StatusOK, response.NewSuccessResponse{
+		Message: "Issu Closed Successfully",
+		Status:  http.StatusNoContent,
+	})
+}
+
 func (h *Handler) AddTag(c *gin.Context) {
 	var Tags dto.BugTag
 

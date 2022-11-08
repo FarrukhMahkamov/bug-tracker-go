@@ -78,6 +78,7 @@ type Bug interface {
 	DeattachUserFromBug(BugId int, Users dto.AttachUsers) error
 	AttachTeamToBug(BugId int, TeamId int) error
 	DetachTeamFromBug(BugId int, TeamId int) error
+	UpdateBug(BugId int, UpdateBug dto.BugUpdate) error
 }
 type Repository struct {
 	Authorization

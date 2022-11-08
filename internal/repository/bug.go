@@ -133,3 +133,9 @@ func (r *BugPostgres) DetachTeamFromBug(BugId int, TeamId int) error {
 
 	return nil
 }
+
+func (r *BugPostgres) UpdateBug(BugId int, UpdateBug dto.BugUpdate) error {
+	_, err := r.db.Exec(query.UpdateBug, UpdateBug.BugTitle, UpdateBug.BugDescription, UpdateBug.StatusId, UpdateBug.CategoryId, BugId)
+
+	return err
+}

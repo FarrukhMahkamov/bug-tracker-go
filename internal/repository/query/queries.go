@@ -17,14 +17,15 @@ const (
 	UpdatedTeam         = `UPDATE teams SET team_name=$1 WHERE id=$2`
 	AddUserToTeam       = `INSERT INTO teams_users(team_id, user_id) VALUES ($1, $2)`
 	RemoveUsersFromTeam = `DELETE FROM teams_users WHERE team_id = $1 AND user_id = $2`
-
-	StoreTag            = `INSERT INTO tags (tag_name) VALUES ($1) RETURNING id, tag_name`
-	GetAllTags          = `SELECT id, tag_name FROM tags`
-	ShowTag             = `SELECT id, tag_name FROM tags WHERE id=$1`
-	DeleteTag           = `DELETE FROM tags WHERE id=$1`
-	UpdatedTag          = `UPDATE tags SET tag_name=$1 WHERE id=$2`
 	AttachTeamToBug     = `INSERT INTO bugs_teams(bug_id, team_id) VALUEST ($1, $2)`
 	DetachTeamFromBug   = `DELETE FROM bugs_teams WHERE bug_id = $1 AND team_id = $2`
+
+	StoreTag   = `INSERT INTO tags (tag_name) VALUES ($1) RETURNING id, tag_name`
+	GetAllTags = `SELECT id, tag_name FROM tags`
+	ShowTag    = `SELECT id, tag_name FROM tags WHERE id=$1`
+	DeleteTag  = `DELETE FROM tags WHERE id=$1`
+	UpdatedTag = `UPDATE tags SET tag_name=$1 WHERE id=$2`
+
 	AttachUserToBug     = `INSERT INTO bugs_users(bug_id, user_id) VALUES ($1, $2)`
 	DeattachUserFromBug = `DELETE FROM bugs_users WHERE bug_id = $1 AND user_id = $2`
 
@@ -59,4 +60,5 @@ const (
 	AddTag         = `INSERT INTO bugs_tags(bug_id, tag_id) VALUES ($1, $2)`
 	GetTagsByBugId = `SELECT t.id, t.tag_name FROM tags t  INNER JOIN bugs_tags on t.id = bugs_tags.tag_id WHERE bug_id = $1`
 	GetTeamUsers   = `SELECT u.id, u.name, u.username, u.email, u.image, u.role FROM users u INNER JOIN teams_users t ON u.id = t.user_id WHERE team_id = $1`
+	UpdateBug      = `UPDATE bugs SET bug_title = $1, bug_description=$2, status_id =$3, category_id=$4 WHERE id=$5`
 )

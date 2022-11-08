@@ -48,3 +48,7 @@ func (s *BugService) AttachTeamToBug(BugId int, TeamId int) error {
 func (s *BugService) DetachTeamFromBug(BugId int, TeamId int) error {
 	return s.repo.DetachTeamFromBug(BugId, TeamId)
 }
+
+func (s *BugService) UpdateBug(BugId int, UpdateBug dto.BugUpdate) error {
+	return s.repo.UpdateBug(BugId, UpdateBug)
+}
