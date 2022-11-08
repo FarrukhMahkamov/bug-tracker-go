@@ -61,6 +61,11 @@ func (h *Handler) UpdateTeam(c *gin.Context) {
 
 	var input dto.TeamUpdate
 
+	if err := c.BindJSON(&input); err != nil {
+		response.NewErrorResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
+
 	err = h.services.Team.UpdatedTeam(input, TeamId)
 	if err != nil {
 		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())

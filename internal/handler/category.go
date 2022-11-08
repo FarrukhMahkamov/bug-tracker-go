@@ -60,6 +60,10 @@ func (h *Handler) UpdateCategory(c *gin.Context) {
 	}
 
 	var input dto.CategoryUpdate
+	if err := c.BindJSON(&input); err != nil {
+		response.NewErrorResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
 
 	err = h.services.Category.UpdatedCategory(input, CategoryId)
 	if err != nil {

@@ -61,6 +61,10 @@ func (h *Handler) UpdateJobType(c *gin.Context) {
 	}
 
 	var input dto.JobTypeUpdate
+	if err := c.BindJSON(&input); err != nil {
+		response.NewErrorResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
 
 	err = h.services.JobType.UpdatedJobType(input, JobTypeId)
 	if err != nil {

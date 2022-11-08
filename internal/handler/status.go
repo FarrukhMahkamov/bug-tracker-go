@@ -60,6 +60,10 @@ func (h *Handler) UpdateStatus(c *gin.Context) {
 	}
 
 	var input dto.StatusUpdate
+	if err := c.BindJSON(&input); err != nil {
+		response.NewErrorResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
 
 	err = h.services.Status.UpdatedStatus(input, StatusId)
 	if err != nil {

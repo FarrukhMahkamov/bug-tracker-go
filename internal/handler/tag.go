@@ -60,6 +60,10 @@ func (h *Handler) UpdateTag(c *gin.Context) {
 	}
 
 	var input dto.TagUpdate
+	if err := c.BindJSON(&input); err != nil {
+		response.NewErrorResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
 
 	err = h.services.Tag.UpdatedTag(input, TagId)
 	if err != nil {
