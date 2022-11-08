@@ -94,7 +94,7 @@ func (h *Handler) InitiRoutes() *gin.Engine {
 			projects.GET("/", h.GetAllProject)
 			projects.POST("/", h.StoreProject)
 			projects.GET("/:id", h.ShowProject)
-			projects.PUT("/:id", h.UpdateProject)
+			projects.POST("/:id/update", h.UpdateProject)
 			projects.DELETE("/:id", h.DeleteProject)
 			projects.POST("/:id/add-users", h.AddUsersToProject)
 			projects.POST("/:id/remove-users", h.RemoveUsersFromProject)

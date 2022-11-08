@@ -59,9 +59,13 @@ func (h *Handler) UpdateProject(c *gin.Context) {
 		return
 	}
 
-	var input dto.ProjectUpdate
+	var Project dto.ProjectUpdate
+	if err := c.BindJSON(&Project); err != nil {
+		response.NewErrorResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
 
-	err = h.services.Project.UpdatedProject(input, ProjectId)
+	err = h.services.Project.UpdatedProject(Project, ProjectId)
 	if err != nil {
 		response.NewErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return

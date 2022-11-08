@@ -1,1 +1,1 @@
-TRUNCATE TABLE schema_migrations;
+SELECT * FROM projects

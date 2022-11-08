@@ -50,8 +50,11 @@ func (r *ProjectPostgres) DeleteProject(ProjectId int) error {
 
 func (r *ProjectPostgres) UpdatedProject(Project dto.ProjectUpdate, ProjectId int) error {
 	_, err := r.db.Exec(query.UpdatedProject, Project.ProjectName, ProjectId)
+	if err != nil {
+		return err
+	}
 
-	return err
+	return nil
 }
 
 func (r *ProjectPostgres) AddUserToProject(ProjectId int, Users dto.ProjectUser) error {
